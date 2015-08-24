@@ -1,5 +1,6 @@
 
 $("#makePlaylist").on("click", function(){
+    $(".currentArtist").children().remove()
     var artist = $("#artistInput").val()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP&artist="+artist+"&format=json&results=20&bucket=tracks&bucket=id:spotify", function(response){
         console.log(response);
@@ -10,12 +11,9 @@ $("#makePlaylist").on("click", function(){
             console.log(track);
             tracks.push(newString);
         }
-        console.log(tracks);
-        //return tracks
-        // var ids = tracks.join()
-        // console.log(ids);
+        var ids = tracks.join()
 
-        // $(".currentArtist").append('<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe" frameborder="0" allowtransparency="true"></iframe>')
+        $(".currentArtist").append('<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
 
     })
 
@@ -23,7 +21,7 @@ $("#makePlaylist").on("click", function(){
 
 })
 
-$(".currentArtist").on("click", function(){
+$("div.artist-name.ellipsis").change(function(){
     var artist = $(".currentArtist").html()
     $.getJSON("http://api.bandsintown.com/events/recommended?artists[]="+artist+"&location=use_geoip&format=json&app_id=YOUR_APP_ID", function(response){
         console.log(response);
