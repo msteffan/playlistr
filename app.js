@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
-
+var methodOverride = require('method-override');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,7 +14,7 @@ var usersController = require("./controllers/users");
 var playlistsController = require("./controllers/playlists");
 
 app.get("/", function(req, res){
-  res.render("home");
+  res.render("layout");
 });
 
 app.use("/", usersController);
