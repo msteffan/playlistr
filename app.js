@@ -14,7 +14,7 @@ var usersController = require("./controllers/users");
 var playlistsController = require("./controllers/playlists");
 
 app.get("/", function(req, res){
-  res.render("layout");
+  res.render("index", {})
 });
 
 app.use("/", usersController);
