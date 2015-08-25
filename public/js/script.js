@@ -22,11 +22,26 @@ $("#makePlaylist").on("click", function(){
       bandCode += "&artists[]="+artist[i].split(' ').join('+')};
     bandCode = bandCode.substr(1);
     console.log(bandCode);
-    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&app_id=YOUR_APP_ID", function(response){
+    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
       console.log(response);
       console.log(response[0]);
       var events = [];
       for (i = 0; i < response.length; i ++)
         {events.push(response[i])}
+
+    //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
+    var currentArtist = "Chromeo";
+    $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + currentArtist + "&format=json", function(response){
+      console.log(response);
+      currentArtistTwitter = response.response.artist.twitter;
+      console.log(currentArtistTwitter);
+    })
+
+    //not working yet
+    //get request to twitter api for artist twitter handle statuses/user_timeline with tweet count = 10; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
+    $.getJSON("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + "Chromeo" + "twitterapi&count=10", function(response){
+      console.log(response);
+
+    })
   })
 })
