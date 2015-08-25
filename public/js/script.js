@@ -21,17 +21,23 @@ $("#makePlaylist").on("click", function(){
         var ids = tracks.join()
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
     })
-
-
-
-})
-
-$("div.artist-name.ellipsis").change(function(){
-    var artist = $(".currentArtist").html()
-    $.getJSON("http://api.bandsintown.com/events/recommended?artists[]="+artist+"&location=use_geoip&format=json&app_id=YOUR_APP_ID", function(response){
-        console.log(response);
-    })
-    $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json", function(response){
-        console.log(response);
+    var bandCode = "";
+    for (i = 0; i < artist.length; i++) {
+      bandCode += "&artists[]="+artist[i].split(' ').join('+');
+    }
+    bandCode = bandCode.substr(1);
+    console.log(bandCode);
+    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&app_id=YOUR_APP_ID", function(response){
+      console.log(response);
     })
 })
+
+// $("div.artist-name.ellipsis").change(function(){
+//     var artist = $(".currentArtist").html()
+//     $.getJSON("http://api.bandsintown.com/events/recommended?artists[]="+artist+"&location=use_geoip&format=json&app_id=YOUR_APP_ID", function(response){
+//         console.log(response);
+//     })
+//     $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json", function(response){
+//         console.log(response);
+//     })
+// })
