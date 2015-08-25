@@ -20,11 +20,24 @@ passport.use(new SpotifyStrategy({
     callbackURL: env.callbackUrl
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
+      token = accessToken
+      tokenSecret = refreshToken
+      profile = profile
+      done(null, profile)
+    //User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
+      //return done(err, user);
+    //});
   }
 ));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
 app.use(passport.initialize())
 app.use(passport.session())
 
