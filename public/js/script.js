@@ -1,4 +1,3 @@
-
 $("#makePlaylist").on("click", function(){
     $(".currentArtist").children().remove()
     var artist = $("#artistInput").val();
@@ -8,7 +7,6 @@ $("#makePlaylist").on("click", function(){
       artistCode += "&artist="+artist[i].split(' ').join('+')};
     var songCount = $("#songCount").val();
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
-        console.log(response);
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
             if (response.response.songs[i]["tracks"][0] === undefined) {
