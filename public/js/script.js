@@ -9,10 +9,17 @@ $("#makePlaylist").on("click", function(){
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
-            var track = response.response.songs[i]["tracks"][0]["foreign_id"]
-            var newString = track.substr(14);
-            tracks.push(newString);
-        }
+            if (response.response.songs[i]["tracks"][0] === undefined) {
+              continue;
+            }
+            else {
+              console.log(response.response.songs[i]["tracks"][0]["foreign_id"])
+              console.log(i)
+              var track = response.response.songs[i]["tracks"][0]["foreign_id"]
+              var newString = track.substr(14);
+              tracks.push(newString);
+            }
+          }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
         //$(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
@@ -28,9 +35,10 @@ $("#makePlaylist").on("click", function(){
       var events = [];
       for (i = 0; i < response.length; i ++)
         {events.push(response[i])}
-  })
-    $.getJSON("http://api.embed.ly/1/oembed?key=54b3d142a80c45b0b6a0a79b9b0789b3&urls=http://www.rdio.com/artist/Dr._Dre/album/Compton/track/Intro/", function(response){
-      console.log(response);
-      $(".currentArtist").append(response[0]["html"])
-  })
+        console.log(events[0].artists[0]["name"])
+    for (i = 0; i <events.length; i ++)
+      {
+        $(".currentArtist").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      }
+    })
 })
