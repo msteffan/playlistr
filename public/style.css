@@ -1,6 +1,5 @@
 .tweets{
   float: right;
-
 }
 
 .leftInput{
@@ -8,8 +7,8 @@
   float: left;
 }
 
-.accordidon{
-  width:50%
+.accordion{
+  height: 30em;
+  width: 50%;
   float: right;
-
 }
