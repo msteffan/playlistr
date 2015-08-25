@@ -15,18 +15,22 @@ $("#makePlaylist").on("click", function(){
         }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
-        $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
+        //$(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
     })
     var bandCode = "";
     for (i = 0; i < artist.length; i++) {
       bandCode += "&artists[]="+artist[i].split(' ').join('+')};
     bandCode = bandCode.substr(1);
     console.log(bandCode);
-    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=jsonp&app_id=YOUR_APP_ID", function(response){
+    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
       console.log(response);
       console.log(response[0]);
       var events = [];
       for (i = 0; i < response.length; i ++)
         {events.push(response[i])}
+  })
+    $.getJSON("http://api.embed.ly/1/oembed?key=54b3d142a80c45b0b6a0a79b9b0789b3&urls=http://www.rdio.com/artist/Dr._Dre/album/Compton/track/Intro/", function(response){
+      console.log(response);
+      $(".currentArtist").append(response[0]["html"])
   })
 })
