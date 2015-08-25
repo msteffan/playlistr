@@ -22,7 +22,7 @@ $("#makePlaylist").on("click", function(){
           }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
-        //$(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
+        $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
     var bandCode = "";
     for (i = 0; i < artist.length; i++) {
