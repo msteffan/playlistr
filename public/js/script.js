@@ -24,9 +24,6 @@ $("#makePlaylist").on("click", function(){
         //getArtist();
 
     })
-
-
-
 })
 
 // $(“#iframe").contents().find(“.artist-name-ellipsis")
@@ -39,18 +36,18 @@ function getArtist(){
         $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json", function(response){
             console.log(response);
         })
+    })
 
-    })
-}
-        $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
-    })
+    $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+ids+'" frameborder="0" height="800" width="400" allowtransparency="true"></iframe>')
+//
     var bandCode = "";
     for (i = 0; i < artist.length; i++) {
       bandCode += "&artists[]="+artist[i].split(' ').join('+');
     }
     bandCode = bandCode.substr(1);
     console.log(bandCode);
-    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&app_id=YOUR_APP_ID", function(response){
+    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=jsonp&app_id=YOUR_APP_ID", function(response){
       console.log(response);
     })
+}
 })
