@@ -1,3 +1,10 @@
+{{#if profile}}
+  Logged in as
+  {{profile.displayName}}
+  <a href='/signout'>Log Out</a>
+  {{else}}
+  <a href='/auth/spotify'>Log in with Spotify</a>
+{{/if}}
 <h1>Something here</h1>
 
 <input type="text" name="name" value="Playlist name" id="listName">
@@ -5,3 +12,11 @@
 <input type="text" name="name" value="How many songs?" id="songCount">
 <input type="button" name="name" value="Search" id="makePlaylist">
 <div class="currentArtist"></div>
+
+
+
+<div class="accordion">
+    <input type="text" name="name" value="Artist name" class="tweets"></div>
+    <div class="tweets"></div>
+    <div class="concerts"></div>
+</div>
