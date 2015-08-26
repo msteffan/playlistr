@@ -51,3 +51,10 @@ $("#makePlaylist").on("click", function(){
     })
 
 })
+
+//event handler for right side button click; should display API information based on artist name input
+$("#makeArtistInfo").on("click", function(){
+  //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
+  $(".artistInfo").children().remove();
+  var artist = $("#artistInput").val();
+});
