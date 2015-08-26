@@ -19,7 +19,7 @@ router.get("/users", function(req, res){
 router.get("/users/:id", function(req, res) {
   User.findById(req.params.id).then(function(user){
     if(!user) return error(res, "not found");
-    res.json(user);
+    res.render("users/show.hbs", {});
   });
 });
 
