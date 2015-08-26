@@ -26,12 +26,12 @@ $("#makePlaylist").on("click", function(){
     })
 
 
-
 })
 
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
     console.log(events[i]);
+      $(".concerts").html("");
       $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
@@ -49,12 +49,29 @@ function getConcertInfo(artist) {
   })
 }
 
+function getArtistBio(artist) {
+  var artistBioCode = artist.split(' ').join('+');
+  console.log(artistBioCode);
+  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artistBioCode+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  var artistBio = response.response.biographies[0]["text"];
+  console.log(artistBio);
+  appendArtistBio(artistBio);
+  })
+}
+
+function appendArtistBio(artistBio){
+  $(".biography").html("");
+  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+}
+
+
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
   //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
   console.log("click is working");
   var artist = $(".getArtistInfo").val();
   getConcertInfo(artist);
+
 
   //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
   $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
@@ -63,5 +80,8 @@ $("#makeArtistInfo").on("click", function(){
     $(".tweets").html(currentArtistTwitter)
     console.log(currentArtistTwitter);
   });
+
+
+  getArtistBio(artist);
 
 });
