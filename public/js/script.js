@@ -37,6 +37,7 @@ $("#makePlaylist").on("click", function(){
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
     console.log(events[i]);
+      $(".concerts").html("");
       $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
@@ -65,8 +66,9 @@ function getArtistBio(artist) {
 }
 
 function appendArtistBio(artistBio){
-      $("body").append('<div class="biography"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
-    }
+  $(".biography").html("");
+  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+}
 
 
 //event handler for right side button click; should display API information based on artist name input
