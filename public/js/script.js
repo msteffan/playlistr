@@ -76,7 +76,7 @@ $("#makeArtistInfo").on("click", function(){
   $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
     console.log(response);
     currentArtistTwitter = response.response.artist.twitter;
-    $(".tweets").html(currentArtistTwitter)
+    $(".tweets").html('<a href="http://www.twitter.com/'+currentArtistTwitter+'">@'+currentArtistTwitter+'</a>')
     console.log(currentArtistTwitter);
   });
 
