@@ -22,15 +22,17 @@ $("#makePlaylist").on("click", function(){
           }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
+
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
-
-
 })
+
+
 
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
     console.log(events[i]);
+
       $(".concerts").html("");
       $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
@@ -67,13 +69,12 @@ function appendArtistBio(artistBio){
 
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
-  //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
   console.log("click is working");
   var artist = $(".getArtistInfo").val();
   getConcertInfo(artist);
 
 
-  //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
+  //get request to echonest api for artist twitter handle
   $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
     console.log(response);
     currentArtistTwitter = response.response.artist.twitter;
@@ -85,3 +86,13 @@ $("#makeArtistInfo").on("click", function(){
   getArtistBio(artist);
 
 });
+
+
+$("#profile").on("click", function(){
+    User.fetch().then(function(users){
+   users.forEach(function(user){
+     var view = new UserView(user)
+     view.render();
+   })
+ })
+})
