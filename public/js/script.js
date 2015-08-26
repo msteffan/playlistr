@@ -24,23 +24,6 @@ $("#makePlaylist").on("click", function(){
         var playlistName = $("#listName").val();
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
-    var bandCode = "";
-    for (i = 0; i < artist.length; i++) {
-      bandCode += "&artists[]="+artist[i].split(' ').join('+')};
-    bandCode = bandCode.substr(1);
-    console.log(bandCode);
-    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
-      console.log(response);
-      console.log(response[0]);
-      var events = [];
-      for (i = 0; i < response.length; i ++)
-        {events.push(response[i])}
-        console.log(events[0].artists[0]["name"])
-    for (i = 0; i <events.length; i ++)
-      {
-        $(".currentArtist").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
-      }
-    })
 
     //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
     var currentArtist = "Chromeo";
@@ -51,3 +34,31 @@ $("#makePlaylist").on("click", function(){
     })
 
 })
+
+function appendConcertInfo(events){
+  for (i = 0; i < events.length; i ++){
+    console.log(events[i]);
+      $("body").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+    }
+}
+
+function getConcertInfo(artist) {
+  var artistCode = artist.split(' ').join('+');
+  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artistCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  var events = [];
+  for (i = 0; i < response.length; i ++){
+    events.push(response[i])
+  }
+  console.log(events);
+  appendConcertInfo(events)
+  })
+}
+
+//event handler for right side button click; should display API information based on artist name input
+$("#makeArtistInfo").on("click", function(){
+  //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
+  console.log("click is working");
+  $(".artistInfo").children().remove();
+  var artist = $(".getArtistInfo").val();
+  getConcertInfo(artist);
+});
