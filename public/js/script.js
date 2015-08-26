@@ -22,9 +22,12 @@ $("#makePlaylist").on("click", function(){
           }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
+
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
 })
+
+
 
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
@@ -83,3 +86,13 @@ $("#makeArtistInfo").on("click", function(){
   getArtistBio(artist);
 
 });
+
+
+$("#profile").on("click", function(){
+    User.fetch().then(function(users){
+   users.forEach(function(user){
+     var view = new UserView(user)
+     view.render();
+   })
+ })
+})

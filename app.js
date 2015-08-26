@@ -59,10 +59,12 @@ var usersController = require("./controllers/users");
 var playlistsController = require("./controllers/playlists");
 
 app.use(function(req, res, callback){
-    console.log("req user is", req.user);
+//console.log("req user is", req.user);
     if (req.user){
         res.locals.user = req.user
-        console.log(req.user);
+        res.locals.spotifyId = req.user[0]["spotifyId"]
+        res.locals.url = "/users/" + req.user[0]["id"]
+        //console.log(req.user[0]["spotifyId"]);
     }
     callback();
 })
