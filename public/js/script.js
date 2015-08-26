@@ -5,10 +5,11 @@ $("#makePlaylist").on("click", function(){
     for (i = 0; i < artist.length; i++) {
       artistCode += "&artist="+artist[i].split(' ').join('+')};
     var songCount = $("#songCount").val();
-    makePlaylist(artistCode, songCount);
+    var playlistName = $("#listName").val();
+    makePlaylist(artistCode, songCount, playlistName);
 })
 
-function makePlaylist(artistCode, songCount){
+function makePlaylist(artistCode, songCount, playlistName){
 //    $(".currentArtist").children().remove()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
@@ -23,7 +24,6 @@ function makePlaylist(artistCode, songCount){
             }
           }
         var ids = tracks.join();
-        var playlistName = $("#listName").val();
 
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
@@ -130,20 +130,17 @@ $("#getPlaylists").on("click", function(){
         method: "get"
     }).done(function(response){
         //console.log("I worked", response);
-        for (i=0; i<response.length; i++){
-            console.log(response.length)
+        for(i=0; i<response.length; i++){
+            console.log("check" + i)
             $("h2").append("<div class='playlistInfo'>"+ response[i]["title"] +"</div>");
+            var playlistName = response[i]["title"]
             var artist = response[i]["artist"].split(", ");
-            console.log(artist);
-            console.log("check1");
             var artistCode = "";
             for (j = 0; j < artist.length; j++) {
-              artistCode += "&artist="+artist[i].split(' ').join('+')
+              artistCode += "&artist="+artist[j].split(' ').join('+')
             };
             var songCount = 15;
-            //console.log(artistCode);
-            makePlaylist(artistCode, songCount);
-            //$(".playlistInfo").append("<div class='playlistInfo'>"+ response[i]["artist"] +"</div>")
+            makePlaylist(artistCode, songCount, playlistName);
         }
     })
 })
