@@ -25,13 +25,7 @@ $("#makePlaylist").on("click", function(){
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
 
-    //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
-    var currentArtist = "Chromeo";
-    $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + currentArtist + "&format=json", function(response){
-      console.log(response);
-      currentArtistTwitter = response.response.artist.twitter;
-      console.log(currentArtistTwitter);
-    })
+
 
 })
 
@@ -61,4 +55,13 @@ $("#makeArtistInfo").on("click", function(){
   console.log("click is working");
   var artist = $(".getArtistInfo").val();
   getConcertInfo(artist);
+
+  //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
+  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
+    console.log(response);
+    currentArtistTwitter = response.response.artist.twitter;
+    $(".tweets").html(currentArtistTwitter)
+    console.log(currentArtistTwitter);
+  });
+
 });
