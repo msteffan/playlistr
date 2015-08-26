@@ -1,3 +1,77 @@
+.row, .column {
+  /* By default, box-sizing is set to content-box */
+  box-sizing: border-box;
+}
+
+.row {
+  /* Let's add a border so we can see our rows better */
+  border: 2px solid red;
+  overflow: auto;
+}
+
+.row.footer {
+  margin-top: 10em;
+  text-align: center;
+}
+
+.column {
+  /* Let's add another border so we can see our columns better */
+  border: 2px solid blue;
+  float: left;
+  text-align: center;
+}
+
+.header > .column,
+.footer > .column {
+  padding: 25px;
+}
+
+.middle > .column {
+  height: 400px
+  line-height: 400px
+}
+
+.header ul {
+  margin: auto;
+}
+
+.header li {
+  display: inline-block;
+  list-style: none;
+}
+
+.module {
+  /* Let's add a background color to our modules so they're clearly visible.*/
+  background: lightblue;
+
+  /* Now let's give our modules a left and right margin of 10px */
+  margin: 0 10px 0 10px;
+}
+
+.column-1 { width: 8.333%; }
+.column-2 { width: 16.66%; }
+.column-3 { width: 25%; }
+.column-4 { width: 33.33%; }
+.column-5 { width: 41.66%; }
+.column-6 { width: 50%; }
+.column-7 { width: 58.33%; }
+.column-8 { width: 66.66%; }
+.column-9 { width: 75%; }
+.column-10 { width: 83.33%; }
+.column-11 { width: 91.66%; }
+.column-12 { width: 100%; }
+
+
+
+h1{
+  text-align: center;
+}
+
+/*
+.login{
+  float: right;
+}
+
 input.tweets{
   float: right;
 }
@@ -11,4 +85,65 @@ input.tweets{
   height: 30em;
   width: 50%;
   float: right;
+}*/
+
+
+
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  /*outline: none;*/
+  padding: 0;
+  height: 30px;
+  width: 10em;
+  position: relative;
+  left: 0;
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0,0,0,.15);
+  background-color: white;
+  font-size: 16px;
+  /*padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;*/
+  /*border: 1px solid #DDDDDD;*/
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+#artistInput{
+  width: 12em;
+}
+
+input[type=button] {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+unput[type=button]:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
