@@ -5,6 +5,9 @@ var env = require("./env");
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var methodOverride = require('method-override');
+var db = require("./db/connection");
+
+// var User = require("./db/connection").models.User;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,16 +22,31 @@ passport.use(new SpotifyStrategy({
     clientSecret: env.consumerSecret,
     callbackURL: env.callbackUrl
   },
-  function(accessToken, refreshToken, profile, done) {
+   function(accessToken, refreshToken, profile, done) {
       token = accessToken
       tokenSecret = refreshToken
       profile = profile
       done(null, profile)
-    //User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-      //return done(err, user);
-    //});
-  }
+//     // db.User.find({
+//     // where: Sequelize.or({ spotifyId: profile.id })
+//     //     }).success(function (user) {
+//     //     if (!user) {
+//     //         db.User.create({ spotifyId: profile.id});
+//     //     }
+//     // });
+    db.models.User.findOrCreate({where: {
+        
+          spotifyId: profile.id
+      }})
+      .spread(function(user, created) {
+        // console.log(user.get({
+        //   plain: true
+        // }))
+        console.log(created)
+    });
+ }
 ));
+
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -63,8 +81,11 @@ app.get('/auth/spotify',
 app.get('/auth/spotify/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }),
   function(req, res) {
+    //   req.session.token = token
+    //   req.session.tokenSecret = tokenSecret
+      //req.session.profile = profile
     // Successful authentication, redirect home.
-    res.redirect('/');
+      res.redirect('/');
   });
 
 
