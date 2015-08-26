@@ -148,7 +148,6 @@ $("#getPlaylists").on("click", function(){
             makePlaylist(artistCode, songCount);
             //$(".playlistInfo").append("<div class='playlistInfo'>"+ response[i]["artist"] +"</div>")
         }
-
     })
 })
 //
