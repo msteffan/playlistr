@@ -32,7 +32,6 @@ $("#makePlaylist").on("click", function(){
       currentArtistTwitter = response.response.artist.twitter;
       console.log(currentArtistTwitter);
     })
-
 })
 
 function appendConcertInfo(events){
@@ -54,6 +53,21 @@ function getConcertInfo(artist) {
   })
 }
 
+function getArtistBio(artist) {
+  var artistBioCode = artist.split(' ').join('+');
+  console.log(artistBioCode);
+  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artistBioCode+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  var artistBio = response.response.biographies[0]["text"];
+  console.log(artistBio);
+  appendArtistBio(artistBio);
+  })
+}
+
+function appendArtistBio(artistBio){
+      $("body").append('<div class="biography"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+    }
+
+
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
   //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
@@ -61,4 +75,5 @@ $("#makeArtistInfo").on("click", function(){
   $(".artistInfo").children().remove();
   var artist = $(".getArtistInfo").val();
   getConcertInfo(artist);
+  getArtistBio(artist);
 });
