@@ -6,7 +6,6 @@ $("#makePlaylist").on("click", function(){
       artistCode += "&artist="+artist[i].split(' ').join('+')};
     var songCount = $("#songCount").val();
     makePlaylist(artistCode, songCount);
-
 })
 
 function makePlaylist(artistCode, songCount){
@@ -18,8 +17,6 @@ function makePlaylist(artistCode, songCount){
               continue;
             }
             else {
-            //   console.log(response.response.songs[i]["tracks"][0]["foreign_id"])
-            //   console.log(i)
               var track = response.response.songs[i]["tracks"][0]["foreign_id"]
               var newString = track.substr(14);
               tracks.push(newString);
@@ -41,7 +38,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 200)+'...</p></div>')
 }
 
 function getTwitterHandle(artist){
@@ -79,7 +76,7 @@ function getArtistNews(artist){
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><h1>News</h1><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
+      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
 }
 
@@ -96,7 +93,7 @@ function getConcertInfo(artist) {
 function appendConcertInfo(events){
   $(".concerts").children().remove();
   for (i = 0; i < events.length; i ++){
-      $(".concerts").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
@@ -137,10 +134,10 @@ $("#getPlaylists").on("click", function(){
             console.log(response.length)
             $("h2").append("<div class='playlistInfo'>"+ response[i]["title"] +"</div>");
             var artist = response[i]["artist"].split(", ");
+            console.log(artist);
             console.log("check1");
             var artistCode = "";
-            // console.log(artist.length);
-            for (i = 0; i < artist.length; i++) {
+            for (j = 0; j < artist.length; j++) {
               artistCode += "&artist="+artist[i].split(' ').join('+')
             };
             var songCount = 15;
