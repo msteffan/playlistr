@@ -10,9 +10,16 @@ function error(res, req){
 }
 
 //GET a user's playlists
-router.get("/:userId/playlists", function(req, res){
-  User.findById(req.params.userId).then(function(user){
-    res.json(user.getPlaylists());
+router.get("/playlists", function(req, res){
+  User.findOne({ where: {spotifyId: req.session.profile.id}})
+  .then(function(user){
+    Playlist.findAll({where: {userId: user.id}})
+    .then(function(playlists, err){
+        //console.log("I worked", playlists);
+        res.json(playlists);
+        console.log(err);
+    })
+
   });
 });
 
