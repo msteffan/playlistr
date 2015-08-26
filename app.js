@@ -3,6 +3,9 @@ var app = express();
 var path = require("path");
 var env = require("./env");
 var session = require("express-session");
+app.use(session({
+  secret: "some secret"
+}))
 var bodyParser = require("body-parser");
 var methodOverride = require('method-override');
 var db = require("./db/connection");
@@ -22,36 +25,28 @@ passport.use(new SpotifyStrategy({
     clientSecret: env.consumerSecret,
     callbackURL: env.callbackUrl
   },
-   function(accessToken, refreshToken, profile, done) {
+   function(accessToken, refreshToken, aProfile, done) {
       token = accessToken
       tokenSecret = refreshToken
-      profile = profile
-      done(null, profile)
-//     // db.User.find({
-//     // where: Sequelize.or({ spotifyId: profile.id })
-//     //     }).success(function (user) {
-//     //     if (!user) {
-//     //         db.User.create({ spotifyId: profile.id});
-//     //     }
-//     // });
-    db.models.User.findOrCreate({where: {
-        
+      profile = aProfile
+
+      db.models.User.findOrCreate({where: {
           spotifyId: profile.id
-      }})
-      .spread(function(user, created) {
+      }}).then(function(user, created) {
+        //   console.log(user);
+          return done(null, user)
         // console.log(user.get({
         //   plain: true
         // }))
         console.log(created)
     });
- }
+  }
 ));
 
 
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
-
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
@@ -63,32 +58,49 @@ app.use(passport.session())
 var usersController = require("./controllers/users");
 var playlistsController = require("./controllers/playlists");
 
+app.use(function(req, res, callback){
+    console.log("req user is", req.user);
+    if (req.user){
+        res.locals.user = req.user
+        console.log(req.user);
+    }
+    callback();
+})
+
+
 app.get("/", function(req, res){
   res.render("index", {})
 });
+
+
+
 
 app.use("/", usersController);
 app.use("/", playlistsController);
 
 
 app.get('/auth/spotify',
-  passport.authenticate('spotify'),
-  function(req, res){
-    // The request will be redirected to spotify for authentication, so this
-    // function will not be called.
-  });
+  passport.authenticate('spotify', {
+      failureRedirect: '/login',
+      successRedirect: "/"
+   })
+  );
 
 app.get('/auth/spotify/callback',
-  passport.authenticate('spotify', { failureRedirect: '/login' }),
+  passport.authenticate('spotify'),
   function(req, res) {
-    //   req.session.token = token
-    //   req.session.tokenSecret = tokenSecret
-      //req.session.profile = profile
+     // console.log("I am here", profile);
+      req.session.token = token
+      req.session.tokenSecret = tokenSecret
+      req.session.profile = profile
     // Successful authentication, redirect home.
       res.redirect('/');
   });
 
-
+  app.get("/signout", function(req, res){
+    req.session.destroy()
+    res.redirect("/")
+  })
 
 
 

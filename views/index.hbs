@@ -1,11 +1,12 @@
 
 <div class="row header">
-  {{#if profile}}
+  {{#if user}}
     Logged in as
-    {{profile.displayName}}
+    {{user.spotifyId}}
     <a href='/signout'>Log Out</a>
   {{else}}
     <a href='/auth/spotify'>Log in with Spotify</a>
+    <a href='/signout'>Log Out</a>
   {{/if}}
 </div>
 
@@ -41,5 +42,7 @@
   </div>
 
 <div class="row footer">
-  Take me down to 34th street where The Disco Biscuits are the king of the beat
+  <div class="column column-12">
+    Take me down to 34th street where The Disco Biscuits are the king of the beat
+  </div>
 </div>

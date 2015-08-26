@@ -5,20 +5,22 @@
 
 .row {
   /* Let's add a border so we can see our rows better */
-  border: 2px solid red;
+  border: 2px solid lightblue;
   overflow: auto;
 }
 
 .row.footer {
   margin-top: 10em;
   text-align: center;
+  display: inline;
 }
 
 .column {
   /* Let's add another border so we can see our columns better */
-  border: 2px solid blue;
+  border: 2px solid lightblue;
   float: left;
   text-align: center;
+  border-radius: 20px;
 }
 
 .header > .column,
