@@ -2,6 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var Playlist = require("../db/connection").models.Playlist;
+var User = require("../db/connection").models.User;
 
 function error(res, req){
   response.status(500);
@@ -17,9 +18,18 @@ router.get("/:userId/playlists", function(req, res){
 
 //POST to playlists
 router.post("/playlists", function(req, res){
-  Playlist.create(req.body).then(function(playlist){
-    res.json(playlist);
-    });
+    User.findOne({ where: {spotifyId: req.session.profile.id }}).then(function(user){
+        var playlist = {
+            title: req.body.title,
+            artist: req.body.artist,
+            userId: user.id
+        };
+      Playlist.create(playlist).then(function(playlist, err){
+        res.json(playlist);
+        console.log(err);
+        });
+    })
+
   });
 
 //GET specific playlist

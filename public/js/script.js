@@ -105,12 +105,28 @@ $("#makeArtistInfo").on("click", function(){
   getArtistNews(artistCode);
 });
 
+$("#save").on("click", function(){
+    console.log("i'm here");
+    var form = $(this).closest("form");
+    // form.find("#artistInput").val();
 
-$("#profile").on("click", function(){
-    User.fetch().then(function(users){
-   users.forEach(function(user){
-     var view = new UserView(user)
-     view.render();
-   })
- })
+    $.ajax({
+        url: form.attr("action"),
+        method: form.attr("method"),
+        data: {
+            artist: $("#artistInput").val(),
+            title: $("#listName").val()
+        }
+    }).done(function(response){
+        console.log("I worked", response);
+    })
 })
+//
+// $("#profile").on("click", function(){
+//     User.fetch().then(function(users){
+//    users.forEach(function(user){
+//      var view = new UserView(user)
+//      view.render();
+//    })
+//  })
+// })

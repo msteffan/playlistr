@@ -64,6 +64,7 @@ app.use(function(req, res, callback){
         res.locals.user = req.user
         res.locals.spotifyId = req.user[0]["spotifyId"]
         res.locals.url = "/users/" + req.user[0]["id"]
+
         //console.log(req.user[0]["spotifyId"]);
     }
     callback();
@@ -73,8 +74,6 @@ app.use(function(req, res, callback){
 app.get("/", function(req, res){
   res.render("index", {})
 });
-
-
 
 
 app.use("/", usersController);
@@ -95,6 +94,7 @@ app.get('/auth/spotify/callback',
       req.session.token = token
       req.session.tokenSecret = tokenSecret
       req.session.profile = profile
+      
     // Successful authentication, redirect home.
       res.redirect('/');
   });

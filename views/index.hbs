@@ -9,12 +9,14 @@
 <div class="column column-12">
   <div class="column column-6">
     <div class="module">
-        <input type="text" name="name" placeholder="Search for artists (max 5)" id="artistInput">
-        <input type="text" name="name" placeholder="Playlist name" id="listName">
-        <input type="text" name="name" placeholder="How many songs?" id="songCount">
-        <br>
-        <input type="button" name="name" value="Search" id="makePlaylist">
-        <input method='post' action='/playlists' type='submit' id='save' value='save'></input>
+        <form class="playlistForm" action="/playlists" method="post">
+            <input type="text" name="name" placeholder="Search for artists (max 5)" id="artistInput">
+            <input type="text" name="name" placeholder="Playlist name" id="listName">
+            <input type="text" name="name" placeholder="How many songs?" id="songCount">
+            <br>
+            <input type="button" name="name" value="Search" id="makePlaylist">
+            <input type='button' id='save' value='save'></input>
+        </form>
       <div class="currentArtist"></div>
     </div>
   </div>
