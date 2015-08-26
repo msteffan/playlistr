@@ -1,11 +1,17 @@
 $("#makePlaylist").on("click", function(){
-    $(".currentArtist").children().remove()
     var artist = $("#artistInput").val();
     var artist = artist.split(", ");
     var artistCode = "";
     for (i = 0; i < artist.length; i++) {
       artistCode += "&artist="+artist[i].split(' ').join('+')};
     var songCount = $("#songCount").val();
+    var playlistName = $("#listName").val();
+    makePlaylist(artistCode, songCount, playlistName);
+
+})
+
+function makePlaylist(artistCode, songCount, playlistName){
+//    $(".currentArtist").children().remove()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
@@ -13,45 +19,22 @@ $("#makePlaylist").on("click", function(){
               continue;
             }
             else {
-              console.log(response.response.songs[i]["tracks"][0]["foreign_id"])
-              console.log(i)
+            //   console.log(response.response.songs[i]["tracks"][0]["foreign_id"])
+            //   console.log(i)
               var track = response.response.songs[i]["tracks"][0]["foreign_id"]
               var newString = track.substr(14);
               tracks.push(newString);
             }
           }
         var ids = tracks.join();
-        var playlistName = $("#listName").val();
 
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
-})
-
-function appendConcertInfo(events){
-  for (i = 0; i < events.length; i ++){
-    console.log("events[i] is ");
-    console.log(events[i]);
-      $(".concerts").html("");
-      $(".concerts").html('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
-    }
-}
-
-function getConcertInfo(artist) {
-  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
-  var events = [];
-  for (i = 0; i < response.length; i ++){
-    events.push(response[i])
-  }
-  console.log(events);
-  appendConcertInfo(events)
-  })
 }
 
 function getArtistBio(artist) {
-  console.log(artist);
   $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
   var artistBio = response.response.biographies[0]["text"];
-  console.log(artistBio);
   appendArtistBio(artistBio);
   })
 }
@@ -63,7 +46,6 @@ function appendArtistBio(artistBio){
 
 function getTwitterHandle(artist){
   $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
-    console.log(response);
     currentArtistTwitter = response.response.artist.twitter;
     appendTwitterLink(currentArtistTwitter);
   });
@@ -73,16 +55,23 @@ function appendTwitterLink(artist){
   $(".tweets").html('<a href="http://www.twitter.com/'+artist+'">@'+artist+'</a>')
 }
 
+function getInstagramHandle(artist){
+  $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
+    currentArtistInstagram = response["data"][0]["username"];
+    appendInstagramLink(currentArtistInstagram);
+  });
+}
+
+function appendInstagramLink(artist){
+  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'">IG</a>')
+}
+
 function getArtistNews(artist){
-  console.log("click is working for get artist news");
   $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
-    console.log(response);
-    console.log(response.response.news);
     var news = [];
     for (i = 0; i < response.response.news.length; i ++){
       news.push(response.response.news[i])
       }
-    console.log(news);
     appendArtistNews(news);
   })
 }
@@ -90,7 +79,6 @@ function getArtistNews(artist){
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
-    console.log(news[i]);
       $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
 }
@@ -101,7 +89,6 @@ function getConcertInfo(artist) {
   for (i = 0; i < response.length; i ++){
     events.push(response[i])
   }
-  console.log(events);
   appendConcertInfo(events);
   })
 }
@@ -109,24 +96,22 @@ function getConcertInfo(artist) {
 function appendConcertInfo(events){
   $(".concerts").children().remove();
   for (i = 0; i < events.length; i ++){
-    console.log(events[i]);
       $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
-  console.log("click is working");
   var artist = $(".getArtistInfo").val();
   var artistCode = artist.split(' ').join('+');
   getConcertInfo(artistCode);
   getArtistBio(artistCode);
   getTwitterHandle(artistCode);
+  getInstagramHandle(artistCode);
   getArtistNews(artistCode);
 });
 
 $("#save").on("click", function(){
-    console.log("i'm here");
     var form = $(this).closest("form");
     // form.find("#artistInput").val();
 
@@ -139,6 +124,27 @@ $("#save").on("click", function(){
         }
     }).done(function(response){
         console.log("I worked", response);
+    })
+})
+
+$("#getPlaylists").on("click", function(){
+    $.ajax({
+        url: "http://127.0.0.1:3000/playlists",
+        method: "get"
+    }).done(function(response){
+        //console.log("I worked", response);
+        for(i=0; i<response.length; i++){
+            console.log("check" + i)
+            $("h2").append("<div class='playlistInfo'>"+ response[i]["title"] +"</div>");
+            var playlistName = response[i]["title"]
+            var artist = response[i]["artist"].split(", ");
+            var artistCode = "";
+            for (j = 0; j < artist.length; j++) {
+              artistCode += "&artist="+artist[j].split(' ').join('+')
+            };
+            var songCount = 15;
+            makePlaylist(artistCode, songCount, playlistName);
+        }
     })
 })
 //
