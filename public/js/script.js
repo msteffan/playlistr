@@ -37,7 +37,7 @@ $("#makePlaylist").on("click", function(){
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
     console.log(events[i]);
-      $("body").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
@@ -48,6 +48,7 @@ function getConcertInfo(artist) {
   for (i = 0; i < response.length; i ++){
     events.push(response[i])
   }
+  console.log(artistCode);
   console.log(events);
   appendConcertInfo(events)
   })
@@ -72,7 +73,6 @@ function appendArtistBio(artistBio){
 $("#makeArtistInfo").on("click", function(){
   //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
   console.log("click is working");
-  $(".artistInfo").children().remove();
   var artist = $(".getArtistInfo").val();
   getConcertInfo(artist);
   getArtistBio(artist);
