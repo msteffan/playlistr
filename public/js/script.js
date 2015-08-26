@@ -22,36 +22,74 @@ $("#makePlaylist").on("click", function(){
           }
         var ids = tracks.join();
         var playlistName = $("#listName").val();
-        
+
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
-    var bandCode = "";
-    for (i = 0; i < artist.length; i++) {
-      bandCode += "&artists[]="+artist[i].split(' ').join('+')};
-    bandCode = bandCode.substr(1);
-    console.log(bandCode);
-    $.getJSON("http://api.bandsintown.com/events/search?"+bandCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
-      console.log(response);
-      console.log(response[0]);
-      var events = [];
-      for (i = 0; i < response.length; i ++)
-        {events.push(response[i])}
-        console.log(events[0].artists[0]["name"])
-    for (i = 0; i <events.length; i ++)
-      {
-        $(".currentArtist").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
-      }
-    })
 
-    //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
-    var currentArtist = "Chromeo";
-    $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + currentArtist + "&format=json", function(response){
-      console.log(response);
-      currentArtistTwitter = response.response.artist.twitter;
-      console.log(currentArtistTwitter);
-    })
 
 })
+
+
+
+function appendConcertInfo(events){
+  for (i = 0; i < events.length; i ++){
+    console.log(events[i]);
+      $(".concerts").html("");
+      $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+    }
+}
+
+function getConcertInfo(artist) {
+  var artistCode = artist.split(' ').join('+');
+  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artistCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  var events = [];
+  for (i = 0; i < response.length; i ++){
+    events.push(response[i])
+  }
+  console.log(artistCode);
+  console.log(events);
+  appendConcertInfo(events)
+  })
+}
+
+function getArtistBio(artist) {
+  var artistBioCode = artist.split(' ').join('+');
+  console.log(artistBioCode);
+  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artistBioCode+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  var artistBio = response.response.biographies[0]["text"];
+  console.log(artistBio);
+  appendArtistBio(artistBio);
+  })
+}
+
+function appendArtistBio(artistBio){
+  $(".biography").html("");
+  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+}
+
+
+//event handler for right side button click; should display API information based on artist name input
+$("#makeArtistInfo").on("click", function(){
+  //need a way to remove previous artist info, but need to use a div that doesn't contain the input box and button
+  console.log("click is working");
+  var artist = $(".getArtistInfo").val();
+  getConcertInfo(artist);
+
+
+  //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
+  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
+    console.log(response);
+    currentArtistTwitter = response.response.artist.twitter;
+    $(".tweets").html(currentArtistTwitter)
+    console.log(currentArtistTwitter);
+  });
+
+
+  getArtistBio(artist);
+
+});
+
+
 $("#profile").on("click", function(){
     User.fetch().then(function(users){
    users.forEach(function(user){
