@@ -1,3 +1,11 @@
+body{
+  color: #2996b9;
+}
+
+#topLogin{
+  color: #2996b9;
+}
+
 .row, .column {
   /* By default, box-sizing is set to content-box */
   box-sizing: border-box;
@@ -5,19 +13,21 @@
 
 .row {
   /* Let's add a border so we can see our rows better */
-  border: 2px solid lightblue;
+  /*border: 2px solid #ADD8E6;*/
   overflow: auto;
 }
 
 .row.footer {
-  margin-top: 10em;
-  text-align: center;
-  display: inline;
+  /*margin-top: 10em;
+  text-align: center;*/
+  display: inline-block;
+  background-color: #ADD8E6;
+  margin-top: 1em;
 }
 
 .column {
   /* Let's add another border so we can see our columns better */
-  border: 2px solid lightblue;
+  /*border: 2px solid #ADD8E6;*/
   float: left;
   text-align: center;
   border-radius: 20px;
@@ -44,10 +54,14 @@
 
 .module {
   /* Let's add a background color to our modules so they're clearly visible.*/
-  background: lightblue;
+  background: #ADD8E6;
 
   /* Now let's give our modules a left and right margin of 10px */
   margin: 0 10px 0 10px;
+
+  margin-top: 1em;
+  border-top: 1px solid #ADD8E6;
+  border-bottom: 1px solid #ADD8E6;
 }
 
 .column-1 { width: 8.333%; }
