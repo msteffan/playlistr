@@ -29,6 +29,7 @@ $("#makePlaylist").on("click", function(){
 
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
+    console.log("events[i] is ");
     console.log(events[i]);
       $(".concerts").html("");
       $(".concerts").html('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
