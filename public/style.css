@@ -121,6 +121,10 @@ input[type=text]:focus, textarea:focus {
   width: 12em;
 }
 
+#listName {
+    width: 8em;
+}
+
 input[type=button] {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
