@@ -27,6 +27,26 @@ $("#makePlaylist").on("click", function(){
     })
 })
 
+function appendConcertInfo(events){
+  for (i = 0; i < events.length; i ++){
+    console.log("events[i] is ");
+    console.log(events[i]);
+      $(".concerts").html("");
+      $(".concerts").html('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+    }
+}
+
+function getConcertInfo(artist) {
+  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  var events = [];
+  for (i = 0; i < response.length; i ++){
+    events.push(response[i])
+  }
+  console.log(events);
+  appendConcertInfo(events)
+  })
+}
+
 function getArtistBio(artist) {
   $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
   var artistBio = response.response.biographies[0]["text"];
@@ -36,7 +56,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 200)+'...</p></div>')
 }
 
 function getTwitterHandle(artist){
@@ -74,7 +94,8 @@ function getArtistNews(artist){
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><h1>News</h1><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
+    console.log(news[i]);
+      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
 }
 
