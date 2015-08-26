@@ -27,7 +27,6 @@ $("#makePlaylist").on("click", function(){
     })
 })
 
-
 function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
     console.log(events[i]);
@@ -37,22 +36,19 @@ function appendConcertInfo(events){
 }
 
 function getConcertInfo(artist) {
-  var artistCode = artist.split(' ').join('+');
-  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artistCode+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
   var events = [];
   for (i = 0; i < response.length; i ++){
     events.push(response[i])
   }
-  console.log(artistCode);
   console.log(events);
   appendConcertInfo(events)
   })
 }
 
 function getArtistBio(artist) {
-  var artistBioCode = artist.split(' ').join('+');
-  console.log(artistBioCode);
-  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artistBioCode+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  console.log(artist);
+  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
   var artistBio = response.response.biographies[0]["text"];
   console.log(artistBio);
   appendArtistBio(artistBio);
@@ -64,25 +60,28 @@ function appendArtistBio(artistBio){
   $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
 }
 
+function getTwitterHandle(artist){
+  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
+    console.log(response);
+    currentArtistTwitter = response.response.artist.twitter;
+    appendTwitterLink(currentArtistTwitter);
+  });
+}
+
+function appendTwitterLink(artist){
+  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'">@'+artist+'</a>')
+}
+
 
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
   console.log("click is working");
   var artist = $(".getArtistInfo").val();
-  getConcertInfo(artist);
-
-
+  var artistCode = artist.split(' ').join('+');
+  getConcertInfo(artistCode);
   //get request to echonest api for artist twitter handle
-  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
-    console.log(response);
-    currentArtistTwitter = response.response.artist.twitter;
-    $(".tweets").html('<a href="http://www.twitter.com/'+currentArtistTwitter+'">@'+currentArtistTwitter+'</a>')
-    console.log(currentArtistTwitter);
-  });
-
-
-  getArtistBio(artist);
-
+  getArtistBio(artistCode);
+  getTwitterHandle(artistCode);
 });
 
 
