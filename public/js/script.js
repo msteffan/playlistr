@@ -41,7 +41,7 @@ $("#makePlaylist").on("click", function(){
         $(".currentArtist").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
       }
     })
-    
+
     //get request to echonest api for artist twitter handle; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
     var currentArtist = "Chromeo";
     $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + currentArtist + "&format=json", function(response){
@@ -50,10 +50,4 @@ $("#makePlaylist").on("click", function(){
       console.log(currentArtistTwitter);
     })
 
-    //not working yet
-    //get request to twitter api for artist twitter handle statuses/user_timeline with tweet count = 10; need to make dynamic for actual current artist, right now refs hardcoded "Chromeo"
-    $.getJSON("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + "Chromeo" + "twitterapi&count=10", function(response){
-      console.log(response);
-
-    })
 })

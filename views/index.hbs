@@ -1,22 +1,38 @@
-{{#if user}}
-  Logged in as
-  {{profile.displayName}}
-  <a href='/signout'>Log Out</a>
+
+<div class="row header">
+  {{#if profile}}
+    Logged in as
+    {{profile.displayName}}
+    <a href='/signout'>Log Out</a>
   {{else}}
-  <a href='/auth/spotify'>Log in with Spotify</a>
-{{/if}}
-<h1>Something here</h1>
+    <a href='/auth/spotify'>Log in with Spotify</a>
+  {{/if}}
+</div>
 
-<input type="text" name="name" value="Playlist name" id="listName">
-<input type="text" name="name" value="Search for artists (max 5)" id="artistInput">
-<input type="text" name="name" value="How many songs?" id="songCount">
-<input type="button" name="name" value="Search" id="makePlaylist">
-<div class="currentArtist"></div>
+<div class="row header">
+  <h1>Welcome to Playlistr</h1>
+  <h1>Please input your playlist name, artists and number of songs for your sweet mix</h1>
+</div>
 
+<div class="column column-12">
+  <div class="column column-6">
+    <input type="text" name="name" placeholder="Search for artists (max 5)" id="artistInput">
+    <input type="text" name="name" placeholder="Playlist name" id="listName">
+    <input type="text" name="name" placeholder="How many songs?" id="songCount">
+    <br>
+    <input type="button" name="name" value="Search" id="makePlaylist">
+      <div class="currentArtist"></div>
+  </div>
 
+  <div class="column column-6">
+      <input type="text" name="name" placeholder="Artist name" class="tweets">
+      <br>
+      <input type="button" name="name" value="Get Artist Info" class = "tweets" id="makePlaylist">
+      <div class="tweets"></div>
+      <div class="concerts"></div>
+  </div>
+</div>
 
-<div class="accordion">
-    <input type="text" name="name" value="Artist name" class="tweets"></div>
-    <div class="tweets"></div>
-    <div class="concerts"></div>
+<div class="row footer">
+  Take me down to 34th street where The Disco Biscuits are the king of the beat
 </div>
