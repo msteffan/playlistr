@@ -39,6 +39,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
+  $(".biographyTitle h1").html("Bio -");
   $(".biography").html('<div class="artistbio"><p>'+artistBio+'...</p></div>')
 }
 
@@ -77,6 +78,7 @@ function getArtistNews(artist){
 
 function appendArtistNews(news){
   $(".news").children().remove();
+  $(".newsTitle h1").html("News +");
   for (i = 0; i < news.length; i ++){
       $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
@@ -94,6 +96,7 @@ function getConcertInfo(artist) {
 
 function appendConcertInfo(events){
   $(".concerts").children().remove();
+  $(".concertsTitle h1").html("Concerts +");
   for (i = 0; i < events.length; i ++){
       $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
