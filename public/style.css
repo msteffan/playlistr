@@ -67,7 +67,7 @@ a:visited {
   width: 100%;
   display: inline-block;
   background-color: rgba(0,0,0,.7);
-  position:fixed;
+  position:relative;
   left:0px;
   bottom:0px;
   /*margin-top: 1em;*/
@@ -189,12 +189,15 @@ input[type=text], textarea {
 input[type=text]:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  margin: 20px auto;
+  /*margin: 5px 1px 3px 0px;*/
   border: 1px solid rgba(81, 203, 238, 1);
 }
 
 #artistInput{
   width: 16em;
+  display: block;
+  /*margin: 20px auto;*/
 }
 
 #listName {
