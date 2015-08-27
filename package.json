@@ -4,6 +4,7 @@
   "description": "As a user I would like to be able to input an artist and have the site generate a playlist",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,7 +18,7 @@
     "nodemon": "^1.4.1",
     "passport": "^0.3.0",
     "passport-spotify": "^0.3.0",
-    "pg": "^4.4.1",
+    "pg": "4.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.6.0"
   },
