@@ -1,15 +1,15 @@
 
-  <div class="module">
+  <!-- <div class="module"> -->
     <h1 class="main-title">Playlistr</h1>
-  </div>
+  <!-- </div> -->
 
 <div class="column column-12">
   <div class="column column-6">
     <div class="module">
-        <h2>Search up to 5 artists (separated by commas), enter how many songs you want (up to 100), and a playlist name.</h2>
+        <h2>Generate a playlist.<br>Enter up to 5 artists, playlist length, and a name.</h2>
         <form class="playlistForm" action="/playlists" method="post">
-            <input type="text" name="name" placeholder="Artists (Max 5)" id="artistInput">
-            <input type="text" name="name" placeholder="Songs (1-100)" id="songCount">
+            <input type="text" name="name" placeholder="Artists (separated by commas)" id="artistInput">
+            <input type="text" name="name" placeholder="Length" id="songCount">
             <input type="text" name="name" placeholder="Playlist Name" id="listName">
             <br>
             <input type="button" name="name" value="Search" id="makePlaylist">
@@ -21,10 +21,10 @@
 
   <div class="column column-6">
       <div class=" rightColumn module">
-        <h2>Hear something you like? Enter the artist's name to learn more.</h2>
+        <h2>Hear something you like?<br>Enter an artist's name to learn more.</h2>
         <input type="text" name="name" placeholder="Artist Name" class="getArtistInfo">
         <br>
-        <input type="button" name="name" value="Get Artist Info" id="makeArtistInfo">
+        <input type="button" name="name" value="Search" id="makeArtistInfo">
         <div class="artistInfo">
             <section id="bio">
               <div class="biographyTitle accordionTitle"><h1>Biography</h1></div>
@@ -53,7 +53,5 @@
 <div class="row footer">
   <div class="column column-12">
 
-      Take me down to 34th street where The Disco Biscuits are the king of the beat
-
-  </div>
+There was something so pleasant about that place   </div>
 </div>
