@@ -136,3 +136,26 @@ $("#showLists").on("click",function(){
      })
    })
 });
+
+
+
+//==================================accordian function
+$('#bio').on('click', function (){
+  $('.biography').toggle(1000);
+});
+
+$('#twitter').on('click', function (){
+  $('.tweets').toggle(1000);
+});
+
+$('#news').on('click', function (){
+  $('.news').toggle(1000);
+});
+
+$('#concerts').on('click', function (){
+  $('.concerts').toggle(1000);
+});
+
+$('#instagram').on('click', function (){
+  $('.instagram').toggle(1000);
+});
