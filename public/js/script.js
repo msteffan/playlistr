@@ -39,7 +39,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biographyTitle").html("<h1>Bio +</h1>");
+  $(".biographyTitle").html("<h1>Bio -</h1>");
   $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0,250)+' ...</p></div>')
 }
 
