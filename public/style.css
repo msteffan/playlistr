@@ -210,9 +210,9 @@ input[type=button]:hover {
 
 .playlist {
     display: inline-block;
-    width: 45%;
-    margin: 2%;
+    /*width: 45%;
+    margin: 2%;*/
     padding: 20px;
-    background-color: blue;
+    background-color: rgba(0,0,0,.7);
     text-align: center;
 }

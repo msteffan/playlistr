@@ -123,7 +123,7 @@ $("#save").on("click", function(){
     })
 })
 
-$("#getPlaylists").on("click", function(){
+// $("#getPlaylists").on("click", function(){
     Playlist.fetch()
     .then(function(playlists){
       playlists.forEach(function(playlist){
@@ -140,4 +140,4 @@ $("#getPlaylists").on("click", function(){
 
      })
    })
-})
+//})

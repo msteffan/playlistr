@@ -1,6 +1,6 @@
 var PlaylistView = function(playlist){
   this.playlist = playlist;
-  this.$el = $("<div class='playlist'></div>");
+  this.$el = $("<div class='column column-6 playlist'><div class='playlist module'</div></div>");
 };
 
 
