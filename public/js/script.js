@@ -116,28 +116,21 @@ $("#save").on("click", function(){
         method: form.attr("method"),
         data: {
             artist: $("#artistInput").val(),
-            title: $("#listName").val()
+            title: $("#listName").val(),
+            songCount: $("#songCount").val()
         }
     }).done(function(response){
         console.log("I worked", response);
     })
 })
 
-// $("#getPlaylists").on("click", function(){
+$("#showLists").on("click",function(){
     Playlist.fetch()
     .then(function(playlists){
       playlists.forEach(function(playlist){
         var view = new PlaylistView(playlist)
         view.render();
-        // var playlistName = playlist.title
-        // var artist = playlist.artist.split(", ");
-        // var artistCode = "";
-        // for (j = 0; j < artist.length; j++) {
-        //     artistCode += "&artist="+artist[j].split(' ').join('+')
-        // };
-        // var songCount = 15;
-        // view.embedPlaylist(artistCode, songCount, playlistName);
 
      })
    })
-//})
+});

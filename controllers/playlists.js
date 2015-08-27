@@ -29,6 +29,7 @@ router.post("/playlists", function(req, res){
         var playlist = {
             title: req.body.title,
             artist: req.body.artist,
+            songCount: req.body.songCount,
             userId: user.id
         };
       Playlist.create(playlist).then(function(playlist, err){
