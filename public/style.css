@@ -268,3 +268,9 @@ h2 {
 #icons{
   display: inline-flex;
 }
+
+@media (max-width: 950px) {
+  .column-6 {
+    width: 100%;
+  }
+}
