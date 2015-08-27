@@ -30,7 +30,7 @@ function makePlaylist(artistCode, songCount, playlistName){
 }
 
 function getArtistBio(artist) {
-  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
   var artistBio = response.response.biographies[0]["text"];
   appendArtistBio(artistBio);
   })
@@ -42,7 +42,7 @@ function appendArtistBio(artistBio){
 }
 
 function getTwitterHandle(artist){
-  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
     currentArtistTwitter = response.response.artist.twitter;
     appendTwitterLink(currentArtistTwitter);
   });
@@ -64,7 +64,7 @@ function appendInstagramLink(artist){
 }
 
 function getArtistNews(artist){
-  $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
     var news = [];
     for (i = 0; i < response.response.news.length; i ++){
       news.push(response.response.news[i])
@@ -81,7 +81,7 @@ function appendArtistNews(news){
 }
 
 function getConcertInfo(artist) {
-  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  $.getJSON("https://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
   var events = [];
   for (i = 0; i < response.length; i ++){
     events.push(response[i])
