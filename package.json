@@ -4,6 +4,7 @@
   "description": "As a user I would like to be able to input an artist and have the site generate a playlist",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
