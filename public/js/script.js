@@ -1,4 +1,5 @@
 $("#makePlaylist").on("click", function(){
+
     var artist = $("#artistInput").val();
     var artist = artist.split(", ");
     var artistCode = "";
@@ -10,7 +11,7 @@ $("#makePlaylist").on("click", function(){
 })
 
 function makePlaylist(artistCode, songCount, playlistName){
-//    $(".currentArtist").children().remove()
+    $(".currentArtist").children().remove()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
@@ -55,6 +56,7 @@ function appendTwitterLink(artist){
 function getInstagramHandle(artist){
   $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
     currentArtistInstagram = response["data"][0]["username"];
+    console.log(currentArtistInstagram);
     appendInstagramLink(currentArtistInstagram);
   });
 }
