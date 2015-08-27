@@ -1,5 +1,4 @@
 $("#makePlaylist").on("click", function(){
-
     var artist = $("#artistInput").val();
     var artist = artist.split(", ");
     var artistCode = "";
@@ -11,7 +10,7 @@ $("#makePlaylist").on("click", function(){
 })
 
 function makePlaylist(artistCode, songCount, playlistName){
-    $("iframe").remove()
+    $("iframe").remove();
     $.getJSON("https://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
@@ -35,6 +34,7 @@ function getArtistBio(artist) {
   appendArtistBio(artistBio);
   })
 }
+
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
@@ -122,13 +122,51 @@ function getConcertInfo(artist) {
   })
 }
 
+function otherConcertSearch(){
+  $(".concerts").append("<input type="text" name="name" placeholder="City, State" class="otherLocation">");
+  $(".concerts").append("<input type="button" name="name" value="Search" id="findOtherConcerts">");
+  $("#findOtherConcerts").on("click", function(){
+  var location = $(".otherLocation").val();
+  getOtherConcerts(location);
+  }
+}
+
 function appendConcertInfo(events){
   $(".concerts").children().remove();
   $(".concertsTitle").html("<h1>Concerts +</h1>");
   for (i = 0; i < events.length; i ++){
         $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
-    $(".concerts").css("display", "none");
+  $(".concerts").css("display", "none");
+  otherConcertSearch();
+}
+
+function getLocationCode(place){
+  place = place.replace(" ", "+");
+  place = place.replace(",+", ",");
+  return place;
+}
+
+function getOtherConcerts(location) {
+  var artist = $(".getArtistInfo").val();
+  var locationCode = getLocationCode(location);
+  $.getJSON("https://api.bandsintown.com/events/search?artists[]="+artist+"&location="+locationCode+"&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  var events = [];
+  for (i = 0; i < response.length; i ++){
+    events.push(response[i])
+  }
+  appendOtherConcerts(events);
+  })
+}
+
+function appendOtherConcerts(events){
+  $(".concerts").children().remove();
+  $(".concertsTitle").html("<h1>Concerts -</h1>");
+  for (i = 0; i < events.length; i ++){
+        $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+    }
+  $(".concerts").css("display", "none");
+  otherConcertSearch();
 }
 
 function convertDate(date){
