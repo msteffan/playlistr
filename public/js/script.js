@@ -1,4 +1,5 @@
 $("#makePlaylist").on("click", function(){
+
     var artist = $("#artistInput").val();
     var artist = artist.split(", ");
     var artistCode = "";
@@ -49,18 +50,19 @@ function getTwitterHandle(artist){
 }
 
 function appendTwitterLink(artist){
-  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'">@'+artist+'</a>')
+  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="../img/twitterLogo.jpg" alt="Twitter Link" height="42" width="42"></a>')
 }
 
 function getInstagramHandle(artist){
   $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
     currentArtistInstagram = response["data"][0]["username"];
+    console.log(currentArtistInstagram);
     appendInstagramLink(currentArtistInstagram);
   });
 }
 
 function appendInstagramLink(artist){
-  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'">IG</a>')
+  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="../img/instagramLogo.gif" alt="Twitter Link" height="42" width="42"></a>')
 }
 
 function getArtistNews(artist){
@@ -96,6 +98,8 @@ function appendConcertInfo(events){
       $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
+
+
 
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
@@ -135,16 +139,14 @@ $("#showLists").on("click",function(){
    })
 });
 
-
-
 //==================================accordian function
 $('#bio').on('click', function (){
   $('.biography').toggle(1000);
 });
 
-$('#twitter').on('click', function (){
-  $('.tweets').toggle(1000);
-});
+// $('icons').on('click', function (){
+//   $('.tweets').toggle(1000);
+// });
 
 $('#news').on('click', function (){
   $('.news').toggle(1000);
@@ -154,11 +156,9 @@ $('#concerts').on('click', function (){
   $('.concerts').toggle(1000);
 });
 
-$('#instagram').on('click', function (){
-  $('.instagram').toggle(1000);
-});
-
-
+// $('#instagram').on('click', function (){
+//   $('.instagram').toggle(1000);
+// });
 
 //=================================Enter submits
 $('.getArtistInfo').keypress(function(e) {
