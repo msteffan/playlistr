@@ -50,15 +50,7 @@ function getTwitterHandle(artist){
 }
 
 function appendTwitterLink(artist){
-<<<<<<< HEAD
-<<<<<<< HEAD
-  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://s3.amazonaws.com/libapps/accounts/15380/images/TwitterIcon.jpg" alt="Twitter Link"></a>')
-=======
-  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://image.e.campaignasia.com/lib/fe8c1570706c0d7b73/m/1/Twitter-Logo-Black-Background2.jpg" alt="Twitter Link" height="42" width="42"></a>')
->>>>>>> 483263786f0d96946f94f84ae5223d866a0ce92d
-=======
   $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="../img/twitterLogo.jpg" alt="Twitter Link" height="42" width="42"></a>')
->>>>>>> 31bc686c5d8f612ffe7b6e038161e0b338173760
 }
 
 function getInstagramHandle(artist){
@@ -152,7 +144,7 @@ $('#bio').on('click', function (){
   $('.biography').toggle(1000);
 });
 
-// $('#twitter').on('click', function (){
+// $('icons').on('click', function (){
 //   $('.tweets').toggle(1000);
 // });
 
