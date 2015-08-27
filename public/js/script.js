@@ -50,7 +50,7 @@ function getTwitterHandle(artist){
 }
 
 function appendTwitterLink(artist){
-  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'">@'+artist+'</a>')
+  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://s3.amazonaws.com/libapps/accounts/15380/images/TwitterIcon.jpg" alt="Twitter Link"></a>')
 }
 
 function getInstagramHandle(artist){
@@ -62,7 +62,7 @@ function getInstagramHandle(artist){
 }
 
 function appendInstagramLink(artist){
-  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'">IG</a>')
+  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="http://blogs.bentley.edu/intheknow/wp-content/uploads/2013/12/Instagram_Icon_Small.png" alt="Instagram Link"></a>')
 }
 
 function getArtistNews(artist){
@@ -98,6 +98,8 @@ function appendConcertInfo(events){
       $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
+
+
 
 //event handler for right side button click; should display API information based on artist name input
 $("#makeArtistInfo").on("click", function(){
