@@ -132,7 +132,6 @@ a:visited {
 .column-12 { width: 100%; }
 
 
-
 h1{
   text-align: center;
 }
@@ -251,4 +250,9 @@ input[type=button]:hover {
     padding: 20px;
     background-color: rgba(0,0,0,.7);
     text-align: center;
+}
+
+
+#twitter{
+  display: inline-flex;
 }

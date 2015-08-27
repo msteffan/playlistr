@@ -50,7 +50,11 @@ function getTwitterHandle(artist){
 }
 
 function appendTwitterLink(artist){
+<<<<<<< HEAD
   $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://s3.amazonaws.com/libapps/accounts/15380/images/TwitterIcon.jpg" alt="Twitter Link"></a>')
+=======
+  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://image.e.campaignasia.com/lib/fe8c1570706c0d7b73/m/1/Twitter-Logo-Black-Background2.jpg" alt="Twitter Link" height="42" width="42"></a>')
+>>>>>>> 483263786f0d96946f94f84ae5223d866a0ce92d
 }
 
 function getInstagramHandle(artist){
@@ -62,7 +66,7 @@ function getInstagramHandle(artist){
 }
 
 function appendInstagramLink(artist){
-  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="http://blogs.bentley.edu/intheknow/wp-content/uploads/2013/12/Instagram_Icon_Small.png" alt="Instagram Link"></a>')
+  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="http://cyberpr.com/assets/instagram-logo-transparent-background_zps6befc220.gif" alt="Twitter Link" height="42" width="42"></a>')
 }
 
 function getArtistNews(artist){
@@ -110,6 +114,8 @@ $("#makeArtistInfo").on("click", function(){
   getTwitterHandle(artistCode);
   getInstagramHandle(artistCode);
   getArtistNews(artistCode);
+  $('.tweets').toggle(1000);
+  $('.instagram').toggle(1000);
 });
 
 $("#save").on("click", function(){
@@ -146,9 +152,9 @@ $('#bio').on('click', function (){
   $('.biography').toggle(1000);
 });
 
-$('#twitter').on('click', function (){
-  $('.tweets').toggle(1000);
-});
+// $('#twitter').on('click', function (){
+//   $('.tweets').toggle(1000);
+// });
 
 $('#news').on('click', function (){
   $('.news').toggle(1000);
@@ -158,9 +164,9 @@ $('#concerts').on('click', function (){
   $('.concerts').toggle(1000);
 });
 
-$('#instagram').on('click', function (){
-  $('.instagram').toggle(1000);
-});
+// $('#instagram').on('click', function (){
+//   $('.instagram').toggle(1000);
+// });
 
 
 
