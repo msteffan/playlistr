@@ -18,6 +18,10 @@ iframe {
     margin: 0 auto;
 }
 
+a:visited {
+    color: #2996b9;
+}
+
 #topLogin{
   color: #2996b9;
 }
