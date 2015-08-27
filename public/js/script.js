@@ -38,13 +38,15 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biography").html('<div class="artistbio"><p>'+artistBio+'...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 250)+' ...</p></div>')
 }
 
 function getTwitterHandle(artist){
   $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
     currentArtistTwitter = response.response.artist.twitter;
+    if (currentArtistTwitter !== undefined){
     appendTwitterLink(currentArtistTwitter);
+  }
   });
 }
 
@@ -73,10 +75,34 @@ function getArtistNews(artist){
   })
 }
 
+function convertDate(date){
+  var months = ["test", "January", "February", "March", "April", "May", "June",
+               "July", "August", "September", "October", "November", "December" ];
+  var monthNumber = parseInt(date.substr(5,2));
+  var month = months[monthNumber];
+  var day = parseInt(date.substr(8,2));
+  var year = date.substr(0,4);
+  return month + " " + day + ", " + year;
+}
+
+function convertTime(date){
+  var newHour = date.substr(11,2);
+  console.log(newHour);
+  var amPm = "A.M";
+  if (parseInt(newHour) > 12)
+  {
+    var newHour = newHour - 12;
+    var amPm = "P.M.";
+  }
+  return newHour + date.substr(13,3) + " " + amPm;
+}
+
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
+    var html = $(".news");
+      html.append()
+      $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+convertDate(news[i]["date_found"])+'</p></div>')
     }
 }
 
@@ -93,7 +119,7 @@ function getConcertInfo(artist) {
 function appendConcertInfo(events){
   $(".concerts").children().remove();
   for (i = 0; i < events.length; i ++){
-      $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
@@ -136,21 +162,46 @@ $("#showLists").on("click",function(){
 });
 
 //==================================accordian function
-$('#bio').on('click', function (){
+$('.biographyTitle').on('click', function (){
   $('.biography').toggle(1000);
+  if ($(".biographyTitle h1").html() == "Bio -") {
+    $(".biographyTitle h1").html("Bio +")
+    }
+  else {
+    $(".biographyTitle h1").html("Bio -")
+  }
 });
 
 // $('#twitter').on('click', function (){
 //   $('.tweets').toggle(1000);
 // });
 
-$('#news').on('click', function (){
+$('.newsTitle').on('click', function (){
   $('.news').toggle(1000);
+  if ($(".newsTitle h1").html() == "News -") {
+    $(".newsTitle h1").html("News +")
+    }
+  else {
+    $(".newsTitle h1").html("News -")
+  }
 });
 
-$('#concerts').on('click', function (){
+$('.concertsTitle').on('click', function (){
   $('.concerts').toggle(1000);
+  if ($(".concertsTitle h1").html() == "Concerts -") {
+    $(".concertsTitle h1").html("Concerts +")
+    }
+  else {
+    $(".concertsTitle h1").html("Concerts -")
+  }
 });
+
+<div class="biographyTitle"><h1>Bio -</h1></div>
+
+<div class="concertsTitle"><h1>Concerts +</h1></div>
+
+<div class="newsTitle"><h1>News +</h1></div>
+
 
 // $('#instagram').on('click', function (){
 //   $('.instagram').toggle(1000);
