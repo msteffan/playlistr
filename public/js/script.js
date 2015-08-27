@@ -83,6 +83,8 @@ function appendArtistNews(news){
   for (i = 0; i < news.length; i ++){
       $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>posted '+news[i]["date_found"]+'</p></div>')
     }
+    $(".news").css("display", "none");
+
 }
 
 function getConcertInfo(artist) {
@@ -101,6 +103,7 @@ function appendConcertInfo(events){
   for (i = 0; i < events.length; i ++){
       $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
+    $(".concerts").css("display", "none");
 }
 
 
