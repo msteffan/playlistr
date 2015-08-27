@@ -49,7 +49,7 @@ function getTwitterHandle(artist){
 }
 
 function appendTwitterLink(artist){
-  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="http://image.e.campaignasia.com/lib/fe8c1570706c0d7b73/m/1/Twitter-Logo-Black-Background2.jpg" alt="Twitter Link" height="42" width="42"></a>')
+  $(".tweets").html('<a href="http://www.twitter.com/'+artist+'"><img src="../img/twitterLogo.jpg" alt="Twitter Link" height="42" width="42"></a>')
 }
 
 function getInstagramHandle(artist){
@@ -60,7 +60,7 @@ function getInstagramHandle(artist){
 }
 
 function appendInstagramLink(artist){
-  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="http://cyberpr.com/assets/instagram-logo-transparent-background_zps6befc220.gif" alt="Twitter Link" height="42" width="42"></a>')
+  $(".instagram").html('<a href="http://www.instagram.com/'+artist+'"><img src="../img/instagramLogo.gif" alt="Twitter Link" height="42" width="42"></a>')
 }
 
 function getArtistNews(artist){
