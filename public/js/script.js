@@ -153,3 +153,7 @@ $('#news').on('click', function (){
 $('#concerts').on('click', function (){
   $('.concerts').toggle(1000);
 });
+
+$('#instagram').on('click', function (){
+  $('.instagram').toggle(1000);
+});
