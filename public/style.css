@@ -197,7 +197,7 @@ input[type=text]:focus, textarea:focus {
 #artistInput{
   width: 16em;
   display: block;
-  /*margin: 20px auto;*/
+  margin: 20px auto;
 }
 
 #listName {
