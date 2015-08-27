@@ -11,7 +11,7 @@ $("#makePlaylist").on("click", function(){
 })
 
 function makePlaylist(artistCode, songCount, playlistName){
-    $(".currentArtist").children().remove()
+    $("iframe").remove()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
@@ -113,45 +113,26 @@ $("#makeArtistInfo").on("click", function(){
 $("#save").on("click", function(){
     var form = $(this).closest("form");
     // form.find("#artistInput").val();
-
     $.ajax({
         url: form.attr("action"),
         method: form.attr("method"),
         data: {
             artist: $("#artistInput").val(),
-            title: $("#listName").val()
+            title: $("#listName").val(),
+            songCount: $("#songCount").val()
         }
     }).done(function(response){
         console.log("I worked", response);
     })
 })
 
-$("#getPlaylists").on("click", function(){
-    $.ajax({
-        url: "http://127.0.0.1:3000/playlists",
-        method: "get"
-    }).done(function(response){
-        //console.log("I worked", response);
-        for(i=0; i<response.length; i++){
-            console.log("check" + i)
-            $("h2").append("<div class='playlistInfo'>"+ response[i]["title"] +"</div>");
-            var playlistName = response[i]["title"]
-            var artist = response[i]["artist"].split(", ");
-            var artistCode = "";
-            for (j = 0; j < artist.length; j++) {
-              artistCode += "&artist="+artist[j].split(' ').join('+')
-            };
-            var songCount = 15;
-            makePlaylist(artistCode, songCount, playlistName);
-        }
-    })
-})
-//
-// $("#profile").on("click", function(){
-//     User.fetch().then(function(users){
-//    users.forEach(function(user){
-//      var view = new UserView(user)
-//      view.render();
-//    })
-//  })
-// })
+$("#showLists").on("click",function(){
+    Playlist.fetch()
+    .then(function(playlists){
+      playlists.forEach(function(playlist){
+        var view = new PlaylistView(playlist)
+        view.render();
+
+     })
+   })
+});

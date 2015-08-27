@@ -1,5 +1,25 @@
+
+*{
+  box-sizing:border-box;
+  font-family: monospace;
+}
+
 body{
   color: #2996b9;
+  background: url("/img/headphones.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+iframe {
+    display: block;
+    margin: 0 auto;
+}
+
+a:visited {
+    color: #2996b9;
 }
 
 #topLogin{
@@ -20,9 +40,10 @@ body{
 .row.footer {
   /*margin-top: 10em;
   text-align: center;*/
+  width: 100%;
   display: inline-block;
-  background-color: #ADD8E6;
-  margin-top: 1em;
+  background-color: rgba(0,0,0,.7);
+  /*margin-top: 1em;*/
 }
 
 .column {
@@ -32,6 +53,12 @@ body{
   text-align: center;
   border-radius: 20px;
 }
+
+.row.header.nav {
+    background-color: black;
+    padding: 0px 20px 20px 20px;
+}
+
 
 .header > .column,
 .footer > .column {
@@ -54,14 +81,17 @@ body{
 
 .module {
   /* Let's add a background color to our modules so they're clearly visible.*/
-  background: #ADD8E6;
-
+  /*background: #ADD8E6;*/
+  background: rgba(
+      0, 0, 0, .7);
+  padding: 30px;
   /* Now let's give our modules a left and right margin of 10px */
   margin: 0 10px 0 10px;
 
-  margin-top: 1em;
-  border-top: 1px solid #ADD8E6;
-  border-bottom: 1px solid #ADD8E6;
+  /*margin-top: 1em;*/
+  /*border-top: 1px solid #ADD8E6;
+  border-bottom: 1px solid #ADD8E6;*/
+
 }
 
 .column-1 { width: 8.333%; }
@@ -103,6 +133,10 @@ input.tweets{
   float: right;
 }*/
 
+.rightColumn {
+    height: 400px;
+    overflow: auto;
+}
 
 
 input[type=text], textarea {
@@ -156,6 +190,7 @@ input[type=button] {
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  margin: 30px;
 }
 
 input[type=button]:hover {
@@ -166,4 +201,22 @@ input[type=button]:hover {
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
+}
+
+.main-title {
+    font-size: 7rem;
+    text-align: left;
+    padding-left: 30px;
+    margin: 10px auto;
+}
+
+/*user#show page styles*/
+
+.playlist {
+    display: inline-block;
+    /*width: 45%;
+    margin: 2%;*/
+    padding: 20px;
+    background-color: rgba(0,0,0,.7);
+    text-align: center;
 }
