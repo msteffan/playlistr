@@ -20,10 +20,10 @@ PlaylistView.prototype = {
     for (j = 0; j < artist.length; j++) {
         artistCode += "&artist="+artist[j].split(' ').join('+')
     };
-    //console.log(this.playlist.songCount);
+    var songCount = this.playlist.songCount;
     // ^^ that log currently returns undefined
     // need to make song count not hard coded
-    var songCount = 15;
+    // var songCount = 15;
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
