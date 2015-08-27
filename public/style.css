@@ -192,11 +192,15 @@ input[type=text]:focus, textarea:focus {
 }
 
 #artistInput{
-  width: 12em;
+  width: 16em;
 }
 
 #listName {
-    width: 8em;
+    width: 9em;
+}
+
+section { 
+  cursor: pointer; cursor: hand;
 }
 
 input[type=button] {

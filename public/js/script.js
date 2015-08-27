@@ -134,3 +134,57 @@ $("#showLists").on("click",function(){
      })
    })
 });
+
+
+
+//==================================accordian function
+$('#bio').on('click', function (){
+  $('.biography').toggle(1000);
+});
+
+$('#twitter').on('click', function (){
+  $('.tweets').toggle(1000);
+});
+
+$('#news').on('click', function (){
+  $('.news').toggle(1000);
+});
+
+$('#concerts').on('click', function (){
+  $('.concerts').toggle(1000);
+});
+
+$('#instagram').on('click', function (){
+  $('.instagram').toggle(1000);
+});
+
+
+
+//=================================Enter submits
+$('.getArtistInfo').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makeArtistInfo').focus().click();
+        }
+    });
+
+    $('#artistInput').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
+
+    $('#listName').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
+
+    $('#songCount').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
