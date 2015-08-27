@@ -1,7 +1,6 @@
 var express = require("express");
 var app = express();
 var path = require("path");
-var env = require("./env");
 var session = require("express-session");
 app.use(session({
   secret: "some secret"
