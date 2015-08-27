@@ -25,7 +25,6 @@ function makePlaylist(artistCode, songCount, playlistName){
             }
           }
         var ids = tracks.join();
-
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
 }
@@ -81,7 +80,7 @@ function appendArtistNews(news){
   $(".news").children().remove();
   $(".newsTitle").html("<h1>News +</h1>");
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+convertDate(news[i]["date_found"])+'</p></div>')
+      $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>posted '+convertDate(news[i]["date_found"])+'</p></div>')
     }
     $(".news").css("display", "none");
 
@@ -107,8 +106,7 @@ function appendConcertInfo(events){
 }
 
 function convertDate(date){
-  var months = ["test", "January", "February", "March", "April", "May", "June",
-               "July", "August", "September", "October", "November", "December" ];
+  var months = ["test", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
   var monthNumber = parseInt(date.substr(5,2));
   var month = months[monthNumber];
   var day = parseInt(date.substr(8,2));
