@@ -233,6 +233,10 @@ input[type=button]:hover {
   cursor: pointer;
 }
 
+h2 {
+  font-size: 0.8em;
+}
+
 .main-title {
     font-family: monospace;
     font-size: 7rem;
