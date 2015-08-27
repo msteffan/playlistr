@@ -113,7 +113,7 @@ input[type=text], textarea {
   /*outline: none;*/
   padding: 0;
   height: 30px;
-  width: 10em;
+  width: 9em;
   position: relative;
   left: 0;
   outline: none;
@@ -167,3 +167,69 @@ input[type=button]:hover {
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
+
+
+
+
+/*
+=========================Accordian
+*/
+
+.artistInfo {
+    background: #eee;
+    border: 1px solid #999;
+    padding: 0 1em 24px;
+    width: 500px;
+    margin: 2em auto;
+}
+
+.artistInfo h2 {
+    margin: 12px 0;
+}
+
+.artistInfo .section {
+    border-bottom: 1px solid #ccc;
+    padding: 0 1em;
+    background: #fff;
+}
+
+.artistInfo h3 a {
+    display: block;
+    font-weight: normal;
+    padding: 1em 0;
+}
+
+.artistInfo h3 a:hover {
+    text-decoration: none;
+}
+
+.artistInfo .section div {
+    height: 0;
+    overflow: hidden;
+    transition: height .4s linear;
+}
+
+/*
+the target pseudoselector activates when an element has been targeted
+via an anchor
+ */
+.artistInfo :target h3 a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.artistInfo :target > div {
+    height: 100px;
+}
+
+/*
+  BONUS: add to this CSS so that when a section has the large class, the content
+  is scrollable in the inner div
+*/
+.artistInfo .section.large:target h3 + div {
+    overflow: auto;
+}
+
+/*.hide {
+    display: none;
+}*/
