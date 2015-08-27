@@ -1,7 +1,6 @@
 var express = require("express");
 var app = express();
 var path = require("path");
-var env = require("./env");
 var session = require("express-session");
 app.use(session({
   secret: "some secret"
@@ -9,18 +8,19 @@ app.use(session({
 var bodyParser = require("body-parser");
 var methodOverride = require('method-override');
 var db = require("./db/connection");
-// var pg = require('pg');
-//
-// pg.connect(process.env.DATABASE_URL, function(err, client) {
-//   if (err) throw err;
-//   console.log('Connected to postgres! Getting schemas...');
-//
-//   client
-//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
-//     .on('row', function(row) {
-//       console.log(JSON.stringify(row));
-//     });
-// });
+var pg = require('pg');
+
+
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
 
 
 // var User = require("./db/connection").models.User;
@@ -30,6 +30,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use("/", express.static(path.join(__dirname + "/public")));
 app.set("view engine", "hbs");
+
+var fs = require("fs")
+if (fs.existsSync("./env.js")){
+ console.log("yes")
+ var env = require("./env");
+}
+else {
+ var env = process.env;
+}
+
 
 var passport = require("passport")
 var SpotifyStrategy = require("passport-spotify").Strategy;
@@ -117,12 +127,10 @@ app.get('/auth/spotify/callback',
     res.redirect("/")
   })
 
+  app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
 
-
-  // http.listen(process.env.PORT || 3000, function(){
-  //   console.log('listening on', http.address().port);
-  // });
-
-app.listen(3000, function(){
-  console.log("Listening on port 3000");
-});
+// app.listen(3000, function(){
+//   console.log("Listening on port 3000");
+// });

@@ -1,4 +1,5 @@
 $("#makePlaylist").on("click", function(){
+
     var artist = $("#artistInput").val();
     var artist = artist.split(", ");
     var artistCode = "";
@@ -11,7 +12,7 @@ $("#makePlaylist").on("click", function(){
 
 function makePlaylist(artistCode, songCount, playlistName){
     $("iframe").remove()
-    $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
+    $.getJSON("https://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
             if (response.response.songs[i]["tracks"][0] === undefined) {
@@ -24,13 +25,12 @@ function makePlaylist(artistCode, songCount, playlistName){
             }
           }
         var ids = tracks.join();
-
         $(".currentArtist").append('<iframe id="musicframe" src="https://embed.spotify.com/?uri=spotify:trackset:'+playlistName+':'+ids+'" frameborder="0" height="500" width="400" allowtransparency="true"></iframe>')
     })
 }
 
 function getArtistBio(artist) {
-  $.getJSON("http://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/biographies?api_key=6N51VGIQONFDX0AGP&name="+artist+"&format=json&results=1&start=0&license=cc-by-sa", function(response){
   var artistBio = response.response.biographies[0]["text"];
   appendArtistBio(artistBio);
   })
@@ -39,11 +39,12 @@ function getArtistBio(artist) {
 function appendArtistBio(artistBio){
   $(".biography").html("");
   $(".biographyTitle").html("<h1>Bio -</h1>");
-  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 250)+' ...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0,250)+' ...</p></div>');
+  $(".biography").css("display", "block");
 }
 
 function getTwitterHandle(artist){
-  $.getJSON("http://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/twitter?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json", function(response){
     currentArtistTwitter = response.response.artist.twitter;
     if (currentArtistTwitter !== undefined){
     appendTwitterLink(currentArtistTwitter);
@@ -58,6 +59,7 @@ function appendTwitterLink(artist){
 function getInstagramHandle(artist){
   $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
     currentArtistInstagram = response["data"][0]["username"];
+    console.log(currentArtistInstagram);
     appendInstagramLink(currentArtistInstagram);
   });
 }
@@ -67,7 +69,7 @@ function appendInstagramLink(artist){
 }
 
 function getArtistNews(artist){
-  $.getJSON("http://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
+  $.getJSON("https://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
     var news = [];
     for (i = 0; i < response.response.news.length; i ++){
       news.push(response.response.news[i])
@@ -100,16 +102,19 @@ function convertTime(date){
 
 function appendArtistNews(news){
   $(".news").children().remove();
+  $(".newsTitle").html("<h1>News +</h1>");
   for (i = 0; i < news.length; i ++){
     $(".newsTitle").html("<h1>News +</h1>");
     var html = $(".news");
       html.append()
       $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+convertDate(news[i]["date_found"])+'</p></div>')
     }
+    $(".news").css("display", "none");
+
 }
 
 function getConcertInfo(artist) {
-  $.getJSON("http://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
+  $.getJSON("https://api.bandsintown.com/events/search?artists[]="+artist+"&location=use_geoip&radius=20&format=json&callback=?&app_id=YOUR_APP_ID", function(response){
   var events = [];
   for (i = 0; i < response.length; i ++){
     events.push(response[i])
@@ -122,8 +127,30 @@ function appendConcertInfo(events){
   $(".concerts").children().remove();
   $(".concertsTitle").html("<h1>Concerts +</h1>");
   for (i = 0; i < events.length; i ++){
-      $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+        $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
+    $(".concerts").css("display", "none");
+}
+
+function convertDate(date){
+  var months = ["test", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+  var monthNumber = parseInt(date.substr(5,2));
+  var month = months[monthNumber];
+  var day = parseInt(date.substr(8,2));
+  var year = date.substr(0,4);
+  return month + " " + day + ", " + year;
+}
+
+function convertTime(date){
+  var newHour = date.substr(11,2);
+  console.log(newHour);
+  var amPm = "A.M";
+  if (parseInt(newHour) > 12)
+  {
+    var newHour = newHour - 12;
+    var amPm = "P.M.";
+  }
+  return newHour + date.substr(13,3) + " " + amPm;
 }
 
 //event handler for right side button click; should display API information based on artist name input
@@ -175,10 +202,6 @@ $('.biographyTitle').on('click', function (){
   }
 });
 
-// $('#twitter').on('click', function (){
-//   $('.tweets').toggle(1000);
-// });
-
 $('.newsTitle').on('click', function (){
   $('.news').toggle(1000);
   if ($(".newsTitle h1").html() == "News -") {
@@ -198,10 +221,6 @@ $('.concertsTitle').on('click', function (){
     $(".concertsTitle h1").html("Concerts -")
   }
 });
-
-// $('#instagram').on('click', function (){
-//   $('.instagram').toggle(1000);
-// });
 
 //=================================Enter submits
 $('.getArtistInfo').keypress(function(e) {

@@ -67,6 +67,9 @@ a:visited {
   width: 100%;
   display: inline-block;
   background-color: rgba(0,0,0,.7);
+  position:fixed;
+  left:0px;
+  bottom:0px;
   /*margin-top: 1em;*/
 }
 
@@ -157,7 +160,7 @@ input.tweets{
 }*/
 
 .rightColumn {
-    height: 400px;
+    height: 80vh;
     overflow: auto;
 }
 
@@ -257,6 +260,6 @@ h2 {
 }
 
 
-#twitter{
+#icons{
   display: inline-flex;
 }
