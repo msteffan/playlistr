@@ -78,7 +78,7 @@ function getArtistNews(artist){
 
 function appendArtistNews(news){
   $(".news").children().remove();
-  $(".newsTitle h1").html("News +");
+  $(".newsTitle").html("<h1>News +</h1>");
   for (i = 0; i < news.length; i ++){
       $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
