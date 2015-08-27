@@ -113,6 +113,7 @@ $("#makeArtistInfo").on("click", function(){
   getTwitterHandle(artistCode);
   getInstagramHandle(artistCode);
   getArtistNews(artistCode);
+  displayHeaders();
 });
 
 $("#save").on("click", function(){
@@ -142,35 +143,38 @@ $("#showLists").on("click",function(){
    })
 });
 
+function displayHeaders(){
+    if ($(".biographyTitle h1").html() == "Bio -") {
+      $(".biographyTitle h1").html("Bio +")
+      }
+    else {
+      $(".biographyTitle h1").html("Bio -")
+    }
+    if ($(".newsTitle h1").html() == "News -") {
+      $(".newsTitle h1").html("News +")
+      }
+    else {
+      $(".newsTitle h1").html("News -")
+    }
+    if ($(".concertsTitle h1").html() == "Concerts -") {
+      $(".concertsTitle h1").html("Concerts +")
+      }
+    else {
+      $(".concertsTitle h1").html("Concerts -")
+    }
+}
+
 //==================================accordian function
 $('.biographyTitle').on('click', function (){
   $('.biography').toggle(1000);
-  if ($(".biographyTitle h1").html() == "Bio -") {
-    $(".biographyTitle h1").html("Bio +")
-    }
-  else {
-    $(".biographyTitle h1").html("Bio -")
-  }
 });
 
 $('.newsTitle').on('click', function (){
   $('.news').toggle(1000);
-  if ($(".newsTitle h1").html() == "News -") {
-    $(".newsTitle h1").html("News +")
-    }
-  else {
-    $(".newsTitle h1").html("News -")
-  }
 });
 
 $('.concertsTitle').on('click', function (){
   $('.concerts').toggle(1000);
-  if ($(".concertsTitle h1").html() == "Concerts -") {
-    $(".concertsTitle h1").html("Concerts +")
-    }
-  else {
-    $(".concertsTitle h1").html("Concerts -")
-  }
 });
 
 //=================================Enter submits
