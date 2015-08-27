@@ -119,10 +119,10 @@ app.get('/auth/spotify/callback',
 
 
 
-  http.listen(process.env.PORT || 3000, function(){
-    console.log('listening on', http.address().port);
-  });
-//
-// app.listen(3000, function(){
-//   console.log("Listening on port 3000");
-// });
+  // http.listen(process.env.PORT || 3000, function(){
+  //   console.log('listening on', http.address().port);
+  // });
+
+app.listen(3000, function(){
+  console.log("Listening on port 3000");
+});
