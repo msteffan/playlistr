@@ -160,7 +160,7 @@ input.tweets{
 }*/
 
 .rightColumn {
-    height: 400px;
+    height: 80vh;
     overflow: auto;
 }
 
