@@ -135,8 +135,6 @@ $("#showLists").on("click",function(){
    })
 });
 
-
-
 //==================================accordian function
 $('#bio').on('click', function (){
   $('.biography').toggle(1000);
@@ -157,8 +155,6 @@ $('#concerts').on('click', function (){
 // $('#instagram').on('click', function (){
 //   $('.instagram').toggle(1000);
 // });
-
-
 
 //=================================Enter submits
 $('.getArtistInfo').keypress(function(e) {
