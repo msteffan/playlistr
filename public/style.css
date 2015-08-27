@@ -199,7 +199,7 @@ input[type=text]:focus, textarea:focus {
     width: 9em;
 }
 
-section { 
+section {
   cursor: pointer; cursor: hand;
 }
 
