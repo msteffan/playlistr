@@ -39,7 +39,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 200)+'...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio+'...</p></div>')
 }
 
 function getTwitterHandle(artist){

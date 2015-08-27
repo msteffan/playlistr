@@ -9,6 +9,19 @@ app.use(session({
 var bodyParser = require("body-parser");
 var methodOverride = require('method-override');
 var db = require("./db/connection");
+// var pg = require('pg');
+//
+// pg.connect(process.env.DATABASE_URL, function(err, client) {
+//   if (err) throw err;
+//   console.log('Connected to postgres! Getting schemas...');
+//
+//   client
+//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+// });
+
 
 // var User = require("./db/connection").models.User;
 
@@ -94,7 +107,7 @@ app.get('/auth/spotify/callback',
       req.session.token = token
       req.session.tokenSecret = tokenSecret
       req.session.profile = profile
-      
+
     // Successful authentication, redirect home.
       res.redirect('/');
   });
@@ -106,7 +119,9 @@ app.get('/auth/spotify/callback',
 
 
 
-
+  // http.listen(process.env.PORT || 3000, function(){
+  //   console.log('listening on', http.address().port);
+  // });
 
 app.listen(3000, function(){
   console.log("Listening on port 3000");
