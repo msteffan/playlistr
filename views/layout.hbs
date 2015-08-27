@@ -3,22 +3,25 @@
     <head>
         <title>Playlistr</title>
         <link rel="stylesheet" href="/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
    </head>
    <body>
        <div class="row header nav">
 
          {{#if user}}
-           <p>Logged in as
-           {{ spotifyId }}</p>
+           <!-- <p>Logged in as
+           {{ spotifyId }}</p> -->
            <a href='/'>Home</a>
-           <a href={{url}}>User profile</a>
+           <a href={{url}}>User Profile</a>
            <a href='/signout'>Log Out</a>
 
            <!-- <p id="profile">User profile</p> -->
            </div>
            {{{body}}}
          {{else}}
-           <a href='/auth/spotify'>Log in with Spotify</a>
+           <form action="/auth/spotify">
+             <input class="login" type="submit" value="Log in with Spotify">
+           </form>
            <!-- <a href='/signout'>Log Out</a> -->
            </div>
          {{/if}}

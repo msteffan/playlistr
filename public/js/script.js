@@ -157,3 +157,34 @@ $('#concerts').on('click', function (){
 $('#instagram').on('click', function (){
   $('.instagram').toggle(1000);
 });
+
+
+
+//=================================Enter submits
+$('.getArtistInfo').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makeArtistInfo').focus().click();
+        }
+    });
+
+    $('#artistInput').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
+
+    $('#listName').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
+
+    $('#songCount').keypress(function(e) {
+        if(e.which == 13) {
+            jQuery(this).blur();
+            jQuery('#makePlaylist').focus().click();
+        }
+    });
