@@ -40,7 +40,8 @@ function getArtistBio(artist) {
 function appendArtistBio(artistBio){
   $(".biography").html("");
   $(".biographyTitle").html("<h1>Bio -</h1>");
-  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0,250)+' ...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0,250)+' ...</p></div>');
+  $(".biography").css("display", "block");
 }
 
 function getTwitterHandle(artist){
@@ -80,7 +81,7 @@ function appendArtistNews(news){
   $(".news").children().remove();
   $(".newsTitle").html("<h1>News +</h1>");
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
+      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>posted '+news[i]["date_found"]+'</p></div>')
     }
 }
 
