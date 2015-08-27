@@ -140,25 +140,35 @@ $("#showLists").on("click",function(){
 });
 
 //==================================accordian function
-$('#bio').on('click', function (){
+$('.biographyTitle').on('click', function (){
   $('.biography').toggle(1000);
+  if ($(".biographyTitle h1").html() == "Bio -") {
+    $(".biographyTitle h1").html("Bio +")
+    }
+  else {
+    $(".biographyTitle h1").html("Bio -")
+  }
 });
 
-// $('icons').on('click', function (){
-//   $('.tweets').toggle(1000);
-// });
-
-$('#news').on('click', function (){
+$('.newsTitle').on('click', function (){
   $('.news').toggle(1000);
+  if ($(".newsTitle h1").html() == "News -") {
+    $(".newsTitle h1").html("News +")
+    }
+  else {
+    $(".newsTitle h1").html("News -")
+  }
 });
 
-$('#concerts').on('click', function (){
+$('.concertsTitle').on('click', function (){
   $('.concerts').toggle(1000);
+  if ($(".concertsTitle h1").html() == "Concerts -") {
+    $(".concertsTitle h1").html("Concerts +")
+    }
+  else {
+    $(".concertsTitle h1").html("Concerts -")
+  }
 });
-
-// $('#instagram').on('click', function (){
-//   $('.instagram').toggle(1000);
-// });
 
 //=================================Enter submits
 $('.getArtistInfo').keypress(function(e) {
