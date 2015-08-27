@@ -7,7 +7,6 @@ $("#makePlaylist").on("click", function(){
     var songCount = $("#songCount").val();
     var playlistName = $("#listName").val();
     makePlaylist(artistCode, songCount, playlistName);
-
 })
 
 function makePlaylist(artistCode, songCount, playlistName){
