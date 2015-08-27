@@ -38,6 +38,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
+  $(".biographyTitle").html("<h1>Bio -</h1>");
   $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 250)+' ...</p></div>')
 }
 
@@ -100,6 +101,7 @@ function convertTime(date){
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
+    $(".newsTitle").html("<h1>News +</h1>");
     var html = $(".news");
       html.append()
       $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+convertDate(news[i]["date_found"])+'</p></div>')
@@ -118,8 +120,9 @@ function getConcertInfo(artist) {
 
 function appendConcertInfo(events){
   $(".concerts").children().remove();
+  $(".concertsTitle").html("<h1>Concerts +</h1>");
   for (i = 0; i < events.length; i ++){
-      $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
@@ -195,13 +198,6 @@ $('.concertsTitle').on('click', function (){
     $(".concertsTitle h1").html("Concerts -")
   }
 });
-
-<div class="biographyTitle"><h1>Bio -</h1></div>
-
-<div class="concertsTitle"><h1>Concerts +</h1></div>
-
-<div class="newsTitle"><h1>News +</h1></div>
-
 
 // $('#instagram').on('click', function (){
 //   $('.instagram').toggle(1000);
