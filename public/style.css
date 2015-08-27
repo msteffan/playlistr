@@ -166,10 +166,10 @@ input.tweets{
 
 
 input[type=text], textarea {
-  -webkit-transition: all 0.30s ease-in-out;
+  /*-webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;*/
   /*outline: none;*/
   padding: 0;
   height: 30px;
@@ -181,6 +181,8 @@ input[type=text], textarea {
   border-color: rgba(0,0,0,.15);
   background-color: white;
   font-size: 16px;
+  margin: 20px auto;
+
   /*padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;*/
   /*border: 1px solid #DDDDDD;*/
