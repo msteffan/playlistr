@@ -5,21 +5,25 @@
         <link rel="stylesheet" href="/style.css">
    </head>
    <body>
-       <div class="row header">
+       <div class="row header nav">
 
          {{#if user}}
-           Logged in as
-           {{ spotifyId }}
-           <a href='/signout'>Log Out</a>
+           <p>Logged in as
+           {{ spotifyId }}</p>
+           <a href='/'>Home</a>
            <a href={{url}}>User profile</a>
+           <a href='/signout'>Log Out</a>
+
            <!-- <p id="profile">User profile</p> -->
+           </div>
            {{{body}}}
          {{else}}
            <a href='/auth/spotify'>Log in with Spotify</a>
            <!-- <a href='/signout'>Log Out</a> -->
+           </div>
          {{/if}}
 
-       </div>
+
        <!-- <header><h1>Playlistr</h1></header> -->
 
 

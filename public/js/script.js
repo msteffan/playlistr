@@ -11,7 +11,7 @@ $("#makePlaylist").on("click", function(){
 })
 
 function makePlaylist(artistCode, songCount, playlistName){
-//    $(".currentArtist").children().remove()
+    $("iframe").remove()
     $.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
@@ -19,8 +19,6 @@ function makePlaylist(artistCode, songCount, playlistName){
               continue;
             }
             else {
-            //   console.log(response.response.songs[i]["tracks"][0]["foreign_id"])
-            //   console.log(i)
               var track = response.response.songs[i]["tracks"][0]["foreign_id"]
               var newString = track.substr(14);
               tracks.push(newString);
@@ -41,7 +39,7 @@ function getArtistBio(artist) {
 
 function appendArtistBio(artistBio){
   $(".biography").html("");
-  $(".biography").html('<div class="artistbio"><h1>Biography</h1><p>'+artistBio.substr(0, 200)+'...</p></div>')
+  $(".biography").html('<div class="artistbio"><p>'+artistBio.substr(0, 200)+'...</p></div>')
 }
 
 function getTwitterHandle(artist){
@@ -79,7 +77,7 @@ function getArtistNews(artist){
 function appendArtistNews(news){
   $(".news").children().remove();
   for (i = 0; i < news.length; i ++){
-      $(".news").append('<div class="newsitem"><h1>News</h1><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
+      $(".news").append('<div class="newsitem"><a href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+news[i]["summary"]+'</p><p>'+news[i]["date_found"]+'</p></div>')
     }
 }
 
@@ -96,7 +94,7 @@ function getConcertInfo(artist) {
 function appendConcertInfo(events){
   $(".concerts").children().remove();
   for (i = 0; i < events.length; i ++){
-      $(".concerts").append('<div class="concert"><h1>Concerts</h1><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
+      $(".concerts").append('<div class="concert"><a href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+events[i].datetime+'</p><a href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
 }
 
@@ -114,7 +112,6 @@ $("#makeArtistInfo").on("click", function(){
 $("#save").on("click", function(){
     var form = $(this).closest("form");
     // form.find("#artistInput").val();
-
     $.ajax({
         url: form.attr("action"),
         method: form.attr("method"),
@@ -128,31 +125,20 @@ $("#save").on("click", function(){
 })
 
 $("#getPlaylists").on("click", function(){
-    $.ajax({
-        url: "http://127.0.0.1:3000/playlists",
-        method: "get"
-    }).done(function(response){
-        //console.log("I worked", response);
-        for(i=0; i<response.length; i++){
-            console.log("check" + i)
-            $("h2").append("<div class='playlistInfo'>"+ response[i]["title"] +"</div>");
-            var playlistName = response[i]["title"]
-            var artist = response[i]["artist"].split(", ");
-            var artistCode = "";
-            for (j = 0; j < artist.length; j++) {
-              artistCode += "&artist="+artist[j].split(' ').join('+')
-            };
-            var songCount = 15;
-            makePlaylist(artistCode, songCount, playlistName);
-        }
-    })
+    Playlist.fetch()
+    .then(function(playlists){
+      playlists.forEach(function(playlist){
+        var view = new PlaylistView(playlist)
+        view.render();
+        // var playlistName = playlist.title
+        // var artist = playlist.artist.split(", ");
+        // var artistCode = "";
+        // for (j = 0; j < artist.length; j++) {
+        //     artistCode += "&artist="+artist[j].split(' ').join('+')
+        // };
+        // var songCount = 15;
+        // view.embedPlaylist(artistCode, songCount, playlistName);
+
+     })
+   })
 })
-//
-// $("#profile").on("click", function(){
-//     User.fetch().then(function(users){
-//    users.forEach(function(user){
-//      var view = new UserView(user)
-//      view.render();
-//    })
-//  })
-// })

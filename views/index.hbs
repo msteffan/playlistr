@@ -1,14 +1,12 @@
 
-<div class="row header">
   <div class="module">
-    <h1>Welcome to Playlistr</h1>
-    <h1>Please input your playlist name, artists and number of songs for your sweet mix</h1>
+    <h1 class="main-title">Playlistr</h1>
   </div>
-</div>
 
 <div class="column column-12">
   <div class="column column-6">
     <div class="module">
+        <h2>Enter a playlist name, up to 5 artists and any number of songs (up to 100) for your sweet mix</h2>
         <form class="playlistForm" action="/playlists" method="post">
             <input type="text" name="name" placeholder="Search for artists (max 5)" id="artistInput">
             <input type="text" name="name" placeholder="Playlist name" id="listName">
@@ -22,7 +20,8 @@
   </div>
 
   <div class="column column-6">
-      <div class="module">
+      <div class=" rightColumn module">
+        <h2>Hear something you like? Enter the artist's name to learn more.</h2>
         <input type="text" name="name" placeholder="Artist name" class="getArtistInfo">
         <br>
         <input type="button" name="name" value="Get Artist Info" id="makeArtistInfo">
@@ -31,11 +30,10 @@
             <div class="biography"></div>
             <div class="tweetsTitle header"><h1>Twitter</h1></div>
             <div class="tweets"></div>
-<<<<<<< HEAD
+
             <div class="instagram"></div>
-=======
+
             <div class="newsTitle header"><h1>News</h1></div>
->>>>>>> 441a504697ae51ab4e22a2d0c290f3987f3e57a7
             <div class="news"></div>
             <div class="concertsTitle header"><h1>Concerts</h1></div>
             <div class="concerts"></div>
