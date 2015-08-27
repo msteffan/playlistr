@@ -106,8 +106,6 @@ $("#makeArtistInfo").on("click", function(){
   getTwitterHandle(artistCode);
   getInstagramHandle(artistCode);
   getArtistNews(artistCode);
-  $('.tweets').toggle(1000);
-  $('.instagram').toggle(1000);
 });
 
 $("#save").on("click", function(){
