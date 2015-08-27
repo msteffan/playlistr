@@ -6,14 +6,14 @@
 <div class="column column-12">
   <div class="column column-6">
     <div class="module">
-        <h2>Enter a playlist name, up to 5 artists and any number of songs (up to 100) for your sweet mix</h2>
+        <h2>Search up to 5 artists (separated by commas), enter how many songs you want (up to 100), and a playlist name.</h2>
         <form class="playlistForm" action="/playlists" method="post">
-            <input type="text" name="name" placeholder="Search for artists (max 5)" id="artistInput">
-            <input type="text" name="name" placeholder="Playlist name" id="listName">
-            <input type="text" name="name" placeholder="How many songs?" id="songCount">
+            <input type="text" name="name" placeholder="Artists (Max 5)" id="artistInput">
+            <input type="text" name="name" placeholder="Songs (1-100)" id="songCount">
+            <input type="text" name="name" placeholder="Playlist Name" id="listName">
             <br>
             <input type="button" name="name" value="Search" id="makePlaylist">
-            <input type='button' id='save' value='save'></input>
+            <input type='button' id='save' value='Save'></input>
         </form>
       <div class="currentArtist"></div>
     </div>
@@ -22,7 +22,7 @@
   <div class="column column-6">
       <div class=" rightColumn module">
         <h2>Hear something you like? Enter the artist's name to learn more.</h2>
-        <input type="text" name="name" placeholder="Artist name" class="getArtistInfo">
+        <input type="text" name="name" placeholder="Artist Name" class="getArtistInfo">
         <br>
         <input type="button" name="name" value="Get Artist Info" id="makeArtistInfo">
         <div class="artistInfo">
