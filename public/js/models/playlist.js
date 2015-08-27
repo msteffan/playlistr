@@ -7,7 +7,7 @@ var Playlist = function(info){
 
 Playlist.fetch = function(){
   var request = $.ajax({
-          url: "http://127.0.0.1:3000/playlists",
+          url: "https://theplaylistr.herokuapp.com/playlists",
           method: "get"
       })
   .then(function(response) {
