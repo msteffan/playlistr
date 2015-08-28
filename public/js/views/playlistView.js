@@ -41,8 +41,8 @@ PlaylistView.prototype = {
   playlistEditTemplate: function(playlist) {
     var html = $("<div>");
     html.append("<input name='title' value='" + playlist.title + "'>");
-    html.append("<button class='updatePlaylist'>Update Playlist</button>");
-    html.append("<button class='deletePlaylist'>Delete Playlist</button>");
+    html.append("<input type='button' class='updatePlaylist'>Update Playlist</input>");
+    html.append("<input type='button' class='deletePlaylist'>Delete Playlist</input>");
     return(html);
   },
   playlistTemplate: function(artist){
