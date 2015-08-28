@@ -48,7 +48,11 @@ Playlist.prototype = {
           url: url,
           //data: JSON.stringify(data),
           type: "DELETE"
-      });
+      }).then(function(response){
+          console.log(response);
+      }
+
+      );;
       return request;
       //console.log(request);
     },
