@@ -194,9 +194,15 @@ function appendConcertInfo(events){
 function otherConcertSearch(){
   $(".concerts").append("<input type='text' name='name' placeholder='City, State' class='otherLocation'>");
   $(".concerts").append("<input type='button' name='name' value='Search' id='findOtherConcerts'>");
+  $('.otherLocation').keypress(function(e) {
+      if(e.which == 13) {
+          jQuery(this).blur();
+          jQuery('#findOtherConcerts').focus().click();
+      }
+  });
   $("#findOtherConcerts").on("click", function(){
-  var location = $(".otherLocation").val();
-  getOtherConcerts(location);
+      var location = $(".otherLocation").val();
+      getOtherConcerts(location);
   })
 }
 
@@ -289,12 +295,5 @@ $('#songCount').keypress(function(e) {
     if(e.which == 13) {
         jQuery(this).blur();
         jQuery('#makePlaylist').focus().click();
-    }
-});
-
-$('.otherLocation').keypress(function(e) {
-    if(e.which == 13) {
-        jQuery(this).blur();
-        jQuery('#findOtherConcerts').focus().click();
     }
 });
