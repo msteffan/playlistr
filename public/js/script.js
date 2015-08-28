@@ -192,12 +192,12 @@ function appendConcertInfo(events){
 
 // function called above - append field for user to search for concerts in other city/state than local
 function otherConcertSearch(){
-  $(".concerts").append("<input type="text" name="name" placeholder="City, State" class="otherLocation">");
-  $(".concerts").append("<input type="button" name="name" value="Search" id="findOtherConcerts">");
+  $(".concerts").append("<input type='text' name='name' placeholder='City, State' class='otherLocation'>");
+  $(".concerts").append("<input type='button' name='name' value='Search' id='findOtherConcerts'>");
   $("#findOtherConcerts").on("click", function(){
   var location = $(".otherLocation").val();
   getOtherConcerts(location);
-  }
+  })
 }
 
 // convert city/state user input into usable string for bandsintown api request
@@ -227,7 +227,7 @@ function appendOtherConcerts(events){
   for (i = 0; i < events.length; i ++){
         $(".concerts").append('<div class="concert"><a target="_blank" href="'+events[i].url+'">'+events[i].artists[0]["name"]+'</a><p>'+convertDate(events[i].datetime)+' '+convertTime(events[i].datetime)+'</p><a target="_blank" href="'+events[i].venue["url"]+'">'+events[i].venue["name"]+'</a><p><a target="_blank" href="'+events[i].ticket_url+'">Tickets</a></p></div>')
     }
-  $(".concerts").css("display", "none");
+  $(".concerts").css("display", "block");
   // user still has option to search another location
   otherConcertSearch();
 }
