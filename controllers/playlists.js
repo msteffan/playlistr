@@ -40,13 +40,15 @@ router.post("/playlists", function(req, res){
 
   });
 
-//GET specific playlist
-// router.get("/playlists/:id", function(req, res){
-//   Playlist.findById(req.params.id).then(function(playlist){
-//     if(!playlist) return error(res, "not found");
-//     res.json(playlist);
-//   });
-// });
+//patch specific playlist
+router.patch("/playlists/:id", function(req, res){
+  Playlist.findById(req.params.id).then(function(playlist){
+    if(!playlist) return error(res, "not found");
+    playlist.updateAttributes(req.body).then(function(updatedPlaylist){
+      res.json(updatedPlaylist);
+    });
+  });
+});
 
 //DELETE specific playlist
 router.delete("/playlists/:id", function(req, res){

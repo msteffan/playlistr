@@ -30,7 +30,9 @@ PlaylistView.prototype = {
   },
   updatePlaylist: function() {
     var self = this;
+    console.log(this.playlist.id);
     var data = {  title: $('input[name=name]').val() }
+                    // id: this.playlist.id }
     this.playlist.update(data)
     .then(function(){
         self.render()
