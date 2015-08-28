@@ -22,9 +22,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     });
 });
 
-
-// var User = require("./db/connection").models.User;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
