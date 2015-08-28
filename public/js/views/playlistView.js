@@ -25,7 +25,7 @@ PlaylistView.prototype = {
     });
 
     self.$el.find(".deletePlaylist").on("click", function() {
-      var data = {  id: this.playlist.id }
+      var data = {  id: self.playlist.id }
       self.playlist.destroy(data).then(function() { self.$el.fadeOut()});
     });
   },
