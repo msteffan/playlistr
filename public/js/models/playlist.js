@@ -23,3 +23,31 @@ Playlist.fetch = function(){
     })
   return request
 }
+
+Playlist.prototype = {
+    update: function(artistData) {
+      var self = this;
+
+      var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
+      var request = $.ajax({
+        url: url,
+        method: "patch",
+        data: JSON.stringify(playlistData),
+        contentType : 'application/json'
+      }).then(
+        function(updatedPlaylistInfo) {self.reload(updatedPlaylistInfo);}
+      );
+      return request;
+    },
+    destroy: function() {
+      var url = "https://theplaylistr.herokuapp.com/artists/" + this.id;
+      var request = $.ajax( {url: url, method: "delete"} );
+      return request;
+    },
+    reload: function(newData){
+      for(var attrname in newData) {
+        this[attrname] = newData[attrname];
+      }
+    }
+
+}

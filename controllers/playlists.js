@@ -41,12 +41,12 @@ router.post("/playlists", function(req, res){
   });
 
 //GET specific playlist
-router.get("/playlists/:id", function(req, res){
-  Playlist.findById(req.params.id).then(function(playlist){
-    if(!playlist) return error(res, "not found");
-    res.json(playlist);
-  });
-});
+// router.get("/playlists/:id", function(req, res){
+//   Playlist.findById(req.params.id).then(function(playlist){
+//     if(!playlist) return error(res, "not found");
+//     res.json(playlist);
+//   });
+// });
 
 //DELETE specific playlist
 router.delete("/playlists/:id", function(req, res){
