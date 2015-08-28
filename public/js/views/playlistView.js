@@ -41,13 +41,13 @@ PlaylistView.prototype = {
   playlistEditTemplate: function(playlist) {
     var html = $("<div>");
     html.append("<input name='title' value='" + playlist.title + "'>");
-    html.append("<input type='button' class='updatePlaylist'>Update Playlist</input>");
-    html.append("<input type='button' class='deletePlaylist'>Delete Playlist</input>");
+    html.append("<input type='button' class='updatePlaylist' value='Update Playlist'></input>");
+    html.append("<input type='button' class='deletePlaylist' value='Delete Playlist'></input>");
     return(html);
   },
   playlistTemplate: function(artist){
     var html = $("<h3 class='"+counter+" title'>" + this.playlist.title + "</h3>");
-    html.append("<button class='editPlaylist'>Edit Playlist</button>");
+    html.append("<input type='button' class='editPlaylist' value='Edit Playlist'></input>");
     counter++
     var playlistName = this.playlist.title
     var artist = this.playlist.artist.split(", ");
