@@ -25,7 +25,7 @@ Playlist.fetch = function(){
 }
 
 Playlist.prototype = {
-    update: function(artistData) {
+    update: function(playlistData) {
       var self = this;
 
       var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
