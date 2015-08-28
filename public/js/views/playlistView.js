@@ -20,24 +20,27 @@ PlaylistView.prototype = {
     var self = this;
     self.$el.html(this.playlistEditTemplate(this.playlist));
 
-    self.$el.find(".updatePlaylist").on("click", function() {
-      self.updatePlaylist();
-    });
-
+    // self.$el.find(".updatePlaylist").on("click", function() {
+    //   self.updatePlaylist();
+    // });
+    //
     // self.$el.find(".deletePlaylist").on("click", function() {
     //   self.playlist.destroy().then(function() { self.$el.fadeOut()});
     // });
   },
-  updatePlaylist: function() {
-    var self = this;
-    var data = {  title:     $('input[name=name]').val(),
-    this.playlist.update(data).then(function() { self.render(); });
+  // updatePlaylist: function() {
+  //   var self = this;
+  //   var data = {  title:     $('input[name=name]').val(),
+    // this.playlist.update(data)
+    // .then(function(){
+    //     self.render()
+    // });
   },
   playlistEditTemplate: function(playlist) {
     var html = $("<div>");
     html.append("<input name='name' value='" + playlist.title + "'>");
     html.append("<button class='updatePlaylist'>Update Playlist</button>");
-    // html.append("<button class='deletePlaylist'>Delete Playlist</button>");
+    html.append("<button class='deletePlaylist'>Delete Playlist</button>");
     return(html);
   },
   playlistTemplate: function(artist){
