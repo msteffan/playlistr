@@ -51,6 +51,7 @@ $("#save").on("click", function(){
 
 // under user profile, a user can view all of his/her playlists after clicking show button
 $("#showLists").on("click",function(){
+    $(".currentArtist").children().remove();
     Playlist.fetch()
     .then(function(playlists){
       playlists.forEach(function(playlist){
