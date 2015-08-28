@@ -42,7 +42,7 @@ Playlist.prototype = {
     },
     destroy: function(data) {
       var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
-      var request = $.ajax( {url: url,data: JSON.stringify(playlistData), method: "delete"} );
+      var request = $.ajax( {url: url,data: JSON.stringify(data), method: "delete"} );
       return request;
     },
     reload: function(newData){
