@@ -17,7 +17,7 @@ router.get("/playlists", function(req, res){
     .then(function(playlists, err){
         //console.log("I worked", playlists);
         res.json(playlists);
-        console.log(err);
+        //console.log(err);
     })
 
   });
@@ -34,17 +34,19 @@ router.post("/playlists", function(req, res){
         };
       Playlist.create(playlist).then(function(playlist, err){
         res.json(playlist);
-        console.log(err);
+        //console.log(err);
         });
     })
 
   });
 
-//GET specific playlist
-router.get("/playlists/:id", function(req, res){
+//patch specific playlist
+router.patch("/playlists/:id", function(req, res){
   Playlist.findById(req.params.id).then(function(playlist){
     if(!playlist) return error(res, "not found");
-    res.json(playlist);
+    playlist.updateAttributes(req.body).then(function(updatedPlaylist){
+      res.json(updatedPlaylist);
+    });
   });
 });
 
@@ -52,7 +54,7 @@ router.get("/playlists/:id", function(req, res){
 router.delete("/playlists/:id", function(req, res){
   Playlist.findById(req.params.id).then(function(playlist){
     if(!playlist) return error(res, "not found");
-    Playlist.destroy().then(function(){
+    playlist.destroy().then(function(){
       res.json({success: true});
     });
   });

@@ -45,7 +45,7 @@ $("#save").on("click", function(){
             songCount: $("#songCount").val()
         }
     }).done(function(response){
-        console.log("I worked", response);
+        // console.log("I worked", response);
     })
 })
 
@@ -94,7 +94,7 @@ function getInstagramHandle(artist){
   $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
     // the first result from the json request is most likely
     currentArtistInstagram = response["data"][0]["username"];
-    console.log(currentArtistInstagram);
+    // console.log(currentArtistInstagram);
     appendInstagramLink(currentArtistInstagram);
   });
 }
@@ -145,7 +145,7 @@ function convertDate(date){
 
 function convertTime(date){
   var newHour = date.substr(11,2);
-  console.log(newHour);
+  //console.log(newHour);
   var amPm = "A.M";
   if (parseInt(newHour) > 12)
   {
@@ -194,9 +194,15 @@ function appendConcertInfo(events){
 function otherConcertSearch(){
   $(".concerts").append("<input type='text' name='name' placeholder='City, State' class='otherLocation'>");
   $(".concerts").append("<input type='button' name='name' value='Search' id='findOtherConcerts'>");
+  $('.otherLocation').keypress(function(e) {
+      if(e.which == 13) {
+          jQuery(this).blur();
+          jQuery('#findOtherConcerts').focus().click();
+      }
+  });
   $("#findOtherConcerts").on("click", function(){
-  var location = $(".otherLocation").val();
-  getOtherConcerts(location);
+      var location = $(".otherLocation").val();
+      getOtherConcerts(location);
   })
 }
 
@@ -292,12 +298,23 @@ $('#songCount').keypress(function(e) {
     }
 });
 
+$('.otherLocation').keypress(function(e) {
+    if(e.which == 13) {
+        jQuery(this).blur();
+        jQuery('#findOtherConcerts').focus().click();
+    }
+});
+
+
+// song lyric array for random song lyrics at bottom
 var songLyrics = ["There was something so pleasant about that place.", "I wanna dance tonight. I wanna toast tonight.", "My umi said shine your light on the world.", "Making momma so proud. But your voice is too loud.", "Crank up the Beach Boys baby, don\'t let the music stop.", "Showin\' how funky strong is your fight", "Somebody said you got a new friend.", "I get jealous, but I\'m too cool to admit it.", "You gotta give me everything, baby, ain\'t no doubt. Need U 100%.", "Et si je compte et je compterai pour toi, je te conterai mes histoires.", "You’re kind of amazing like a time machine.", "The Digital Buddha is coming for you.", "On my tricycle, I’m in heaven, she’s my tricycle, I’m her melon.", "My ship at sail can climb a mountain, Ride it to the sky.", "You look like someone I know, where did I meet you and where do we go?", "And hope fuels generations. And hope can start your car. And hope is the root of fantasy. It\'s nothing but a star.", "And I found peace on the waiting room floor.", "You make me feel alive like a parachute in the sky", "Welcome to the crazy part of town. We like to take your life and turn it upside down", "In the shadow of the digital buddha are the countless wise, to bring you inspiration that you cannot buy.", "In the shadow of the digital buddha are the countless wise, to lift our generation to the highest high.", "Cheers to you it\'s like a dream you live by seeking fortunes at the door", "Baby I\'m in space when I\'m with you... Floating around nothing to do, maybe we can take a walk on the moon", "I can see it in your eyes, that you don\'t know what to say, I say goodbye, and walk away", "Cause tonight we can\'t do anything wrong", "Take me down to 34th street, where The Disco Biscuits are the king of the beat.", "Is there a pot of gold, at the end of this sweet rainbow?", "Always knew my home was in paradise.", "Hey little baby, now the morning\'s here. Gonna open my eyes, don\'t disappear."]
 
+// generate random song lyric from array above
 function getLyric() {
    return songLyrics[Math.floor(Math.random() * songLyrics.length)];
 }
 
+// enter random song lyric
 $(document).ready(function(){
-$(".songLyrics").html(getLyric());
+  $(".songLyrics").html(getLyric());
 })

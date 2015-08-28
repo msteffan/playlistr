@@ -42,6 +42,10 @@ iframe {
     margin: 0 auto;
 }
 
+a {
+    color: #2996b9;
+}
+
 a:visited {
     color: #2996b9;
 }
@@ -67,7 +71,7 @@ a:visited {
   width: 100%;
   display: inline-block;
   background-color: rgba(0,0,0,.7);
-  position:fixed;
+  position:relative;
   left:0px;
   bottom:0px;
   /*margin-top: 1em;*/
@@ -166,10 +170,10 @@ input.tweets{
 
 
 input[type=text], textarea {
-  -webkit-transition: all 0.30s ease-in-out;
+  /*-webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;*/
   /*outline: none;*/
   padding: 0;
   height: 30px;
@@ -181,6 +185,8 @@ input[type=text], textarea {
   border-color: rgba(0,0,0,.15);
   background-color: white;
   font-size: 16px;
+  margin: 20px auto;
+
   /*padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;*/
   /*border: 1px solid #DDDDDD;*/
@@ -189,12 +195,15 @@ input[type=text], textarea {
 input[type=text]:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  margin: 20px auto;
+  /*margin: 5px 1px 3px 0px;*/
   border: 1px solid rgba(81, 203, 238, 1);
 }
 
 #artistInput{
   width: 16em;
+  display: block;
+  margin: 20px auto;
 }
 
 #listName {
@@ -262,4 +271,10 @@ h2 {
 
 #icons{
   display: inline-flex;
+}
+
+@media (max-width: 950px) {
+  .column-6 {
+    width: 100%;
+  }
 }
