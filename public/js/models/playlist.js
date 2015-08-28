@@ -40,9 +40,9 @@ Playlist.prototype = {
       );
       return request;
     },
-    destroy: function() {
+    destroy: function(data) {
       var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
-      var request = $.ajax( {url: url, method: "delete"} );
+      var request = $.ajax( {url: url,data: JSON.stringify(playlistData), method: "delete"} );
       return request;
     },
     reload: function(newData){
