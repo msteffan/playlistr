@@ -54,7 +54,7 @@ router.patch("/playlists/:id", function(req, res){
 router.delete("/playlists/:id", function(req, res){
   Playlist.findById(req.params.id).then(function(playlist){
     if(!playlist) return error(res, "not found");
-    Playlist.destroy().then(function(){
+    playlist.destroy().then(function(){
       res.json({success: true});
     });
   });
