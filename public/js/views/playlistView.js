@@ -35,7 +35,7 @@ PlaylistView.prototype = {
     // .then(function(){
     //     self.render()
     // });
-  },
+  //},
   playlistEditTemplate: function(playlist) {
     var html = $("<div>");
     html.append("<input name='name' value='" + playlist.title + "'>");
