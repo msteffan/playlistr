@@ -2,7 +2,8 @@ var Playlist = function(info){
   this.title = info.title;
   this.userId = info.userId;
   this.artist = info.artist;
-  this.songCount = info.songCount
+  this.songCount = info.songCount;
+  this.id= info.id;
 }
 
 Playlist.fetch = function(){
