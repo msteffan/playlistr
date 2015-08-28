@@ -45,7 +45,7 @@ $("#save").on("click", function(){
             songCount: $("#songCount").val()
         }
     }).done(function(response){
-        console.log("I worked", response);
+        // console.log("I worked", response);
     })
 })
 
@@ -94,7 +94,7 @@ function getInstagramHandle(artist){
   $.getJSON("https://api.instagram.com/v1/users/search?q="+artist+"&client_id=e69bb07dfd304f7887ce690a6290ab62&callback=?", function(response){
     // the first result from the json request is most likely
     currentArtistInstagram = response["data"][0]["username"];
-    console.log(currentArtistInstagram);
+    // console.log(currentArtistInstagram);
     appendInstagramLink(currentArtistInstagram);
   });
 }
@@ -145,7 +145,7 @@ function convertDate(date){
 
 function convertTime(date){
   var newHour = date.substr(11,2);
-  console.log(newHour);
+  //console.log(newHour);
   var amPm = "A.M";
   if (parseInt(newHour) > 12)
   {

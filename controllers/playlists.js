@@ -17,7 +17,7 @@ router.get("/playlists", function(req, res){
     .then(function(playlists, err){
         //console.log("I worked", playlists);
         res.json(playlists);
-        console.log(err);
+        //console.log(err);
     })
 
   });
@@ -34,7 +34,7 @@ router.post("/playlists", function(req, res){
         };
       Playlist.create(playlist).then(function(playlist, err){
         res.json(playlist);
-        console.log(err);
+        //console.log(err);
         });
     })
 
