@@ -16,7 +16,7 @@ Playlist.fetch = function(){
     for(var i = 0; i < response.length; i++){
       playlists.push(new Playlist(response[i]))
     }
-    console.log(playlists);
+    // console.log(playlists);
     return playlists
     })
   .fail(function(response){
@@ -41,7 +41,7 @@ Playlist.prototype = {
       return request;
     },
     destroy: function() {
-        console.log("in destroy");
+        // console.log("in destroy");
         //console.log(data);
       var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
       var request = $.ajax({
@@ -49,7 +49,7 @@ Playlist.prototype = {
           //data: JSON.stringify(data),
           type: "DELETE"
       }).then(function(response){
-          console.log(response);
+        //   console.log(response);
       }
 
       );;
