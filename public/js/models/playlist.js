@@ -40,18 +40,17 @@ Playlist.prototype = {
       );
       return request;
     },
-    destroy: function(data) {
+    destroy: function() {
         console.log("in destroy");
-        console.log(data);
-        console.log(url);
+        //console.log(data);
       var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
       var request = $.ajax({
           url: url,
           //data: JSON.stringify(data),
-          method: "delete"
+          type: "DELETE"
       });
       return request;
-      console.log(request);
+      //console.log(request);
     },
     reload: function(newData){
       for(var attrname in newData) {
