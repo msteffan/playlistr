@@ -297,3 +297,10 @@ $('#songCount').keypress(function(e) {
         jQuery('#makePlaylist').focus().click();
     }
 });
+
+$('.otherLocation').keypress(function(e) {
+    if(e.which == 13) {
+        jQuery(this).blur();
+        jQuery('#findOtherConcerts').focus().click();
+    }
+});
