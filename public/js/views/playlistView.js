@@ -31,8 +31,7 @@ PlaylistView.prototype = {
   updatePlaylist: function() {
     var self = this;
     console.log(this.playlist.id);
-    var data = {  title: $('input[name=name]').val() }
-                    // id: this.playlist.id }
+    var data = {  title: $('input[name=title]').val() }
     this.playlist.update(data)
     .then(function(){
         self.render()
@@ -40,7 +39,7 @@ PlaylistView.prototype = {
   },
   playlistEditTemplate: function(playlist) {
     var html = $("<div>");
-    html.append("<input name='name' value='" + playlist.title + "'>");
+    html.append("<input name='title' value='" + playlist.title + "'>");
     html.append("<button class='updatePlaylist'>Update Playlist</button>");
     html.append("<button class='deletePlaylist'>Delete Playlist</button>");
     return(html);
