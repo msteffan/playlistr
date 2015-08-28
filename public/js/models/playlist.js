@@ -41,7 +41,7 @@ Playlist.prototype = {
       return request;
     },
     destroy: function() {
-      var url = "https://theplaylistr.herokuapp.com/artists/" + this.id;
+      var url = "https://theplaylistr.herokuapp.com/playlists/" + this.id;
       var request = $.ajax( {url: url, method: "delete"} );
       return request;
     },
