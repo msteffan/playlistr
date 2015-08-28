@@ -9,7 +9,7 @@ PlaylistView.prototype = {
   render: function(){
     var self = this;
     self.$el.html(self.playlistTemplate(self.playlist));
-    $(".currentPlaylist").append(self.$el);
+    $(".currentArtist").append(self.$el);
     // var editButton = self.$el.find(".editPlaylist");
     // editButton.on("click", function() {
     //   self.renderEditForm();
@@ -28,7 +28,7 @@ PlaylistView.prototype = {
   //     self.playlist.destroy().then(function() { self.$el.fadeOut()});
   //   });
   // },
-  // updatePlalist: function() {
+  // updatePlaylist: function() {
   //   var self = this;
   //   var data = {  title:     $('input[name=name]').val(),
   //   this.playlist.update(data).then(function() { self.render(); });
