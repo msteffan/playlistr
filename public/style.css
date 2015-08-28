@@ -42,6 +42,10 @@ iframe {
     margin: 0 auto;
 }
 
+a {
+    color: #2996b9;
+}
+
 a:visited {
     color: #2996b9;
 }
