@@ -15,7 +15,7 @@ $("#makePlaylist").on("click", function(){
 // this generates a spotify iframe using the echonest basic playlist api and spotify song ids
 function makePlaylist(artistCode, songCount, playlistName){
     $("iframe").remove();
-    $.getJSON("https://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
+    $.getJSON("https://developer.echonest.com/api/v4/playlist/static?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
             if (response.response.songs[i]["tracks"][0] === undefined) {
@@ -70,7 +70,7 @@ $("#makeArtistInfo").on("click", function(){
   getInstagramHandle(artistCode);
   getArtistBio(artistCode);
   getConcertInfo(artistCode);
-  getArtistNews(artistCode);
+  getArtistTracks(artistCode);
 });
 
 // retrieving the artist's official twitter handle from the echonest api
@@ -121,17 +121,6 @@ function appendArtistBio(artistBio){
   $(".biography").css("display", "block");
 }
 
-// get recent artist news from the echonest api
-function getArtistNews(artist){
-  $.getJSON("https://developer.echonest.com/api/v4/artist/news?api_key=6N51VGIQONFDX0AGP&name=" + artist + "&format=json&results=5&start=0", function(response){
-    var news = [];
-    for (i = 0; i < response.response.news.length; i ++){
-      news.push(response.response.news[i])
-      }
-    appendArtistNews(news);
-  })
-}
-
 // convertDate and convertTime give us legible date & time info from the datetime echonest value
 function convertDate(date){
   var months = ["test", "January", "February", "March", "April", "May", "June",
@@ -155,14 +144,23 @@ function convertTime(date){
   return newHour + date.substr(13,3) + " " + amPm;
 }
 
-// for each of the 5 artist news pieces, we append the title, link and date posted
-function appendArtistNews(news){
+// get recent artist tracks from the hype machine api
+function getArtistTracks(artist){
+  $.getJSON("https://api.hypem.com/v2/tracks?q="+artist+"&count=8&key=swagger", function(response){
+    var tracks = [];
+    for (i = 0; i < response.length; i ++){
+      tracks.push(response[i])
+      }
+    appendArtistTracks(tracks);
+  })
+}
+
+// for each of the 8 hype machine songs
+function appendArtistTracks(tracks){
   $(".news").children().remove();
-  $(".newsTitle").html("<h1>News +</h1>");
-  for (i = 0; i < news.length; i ++){
-    var html = $(".news");
-      html.append()
-      $(".news").append('<div class="newsitem"><a target="_blank" href="'+news[i].url+'">'+news[i]["name"]+'</a><p>'+convertDate(news[i]["date_found"])+'</p></div>')
+  $(".newsTitle").html("<h1>Hype Machine +</h1>");
+  for (i = 0; i < tracks.length; i ++){
+      $(".news").append('<div class="newsitem"><a target="_blank" href="http://hypem.com/track/'+tracks[i].itemid+'">'+tracks[i]["artist"]+' - '+tracks[i]["title"]+'</a></div>')
     }
     // default view only shows the News header - readers can expand by clicking
     $(".news").css("display", "none");
@@ -251,11 +249,11 @@ $('.biographyTitle').on('click', function (){
 
 $('.newsTitle').on('click', function (){
   $('.news').toggle(1000);
-  if ($(".newsTitle h1").html() == "News -") {
-    $(".newsTitle h1").html("News +")
+  if ($(".newsTitle h1").html() == "Hype Machine -") {
+    $(".newsTitle h1").html("Hype Machine +")
     }
   else {
-    $(".newsTitle h1").html("News -")
+    $(".newsTitle h1").html("Hype Machine -")
   }
 });
 
@@ -307,7 +305,7 @@ $('.otherLocation').keypress(function(e) {
 
 
 // song lyric array for random song lyrics at bottom
-var songLyrics = ["There was something so pleasant about that place.", "I wanna dance tonight. I wanna toast tonight.", "My umi said shine your light on the world.", "Making momma so proud. But your voice is too loud.", "Crank up the Beach Boys baby, don\'t let the music stop.", "Showin\' how funky strong is your fight", "Somebody said you got a new friend.", "I get jealous, but I\'m too cool to admit it.", "You gotta give me everything, baby, ain\'t no doubt. Need U 100%.", "Et si je compte et je compterai pour toi, je te conterai mes histoires.", "You’re kind of amazing like a time machine.", "The Digital Buddha is coming for you.", "On my tricycle, I’m in heaven, she’s my tricycle, I’m her melon.", "My ship at sail can climb a mountain, Ride it to the sky.", "You look like someone I know, where did I meet you and where do we go?", "And hope fuels generations. And hope can start your car. And hope is the root of fantasy. It\'s nothing but a star.", "And I found peace on the waiting room floor.", "You make me feel alive like a parachute in the sky", "Welcome to the crazy part of town. We like to take your life and turn it upside down", "In the shadow of the digital buddha are the countless wise, to bring you inspiration that you cannot buy.", "In the shadow of the digital buddha are the countless wise, to lift our generation to the highest high.", "Cheers to you it\'s like a dream you live by seeking fortunes at the door", "Baby I\'m in space when I\'m with you... Floating around nothing to do, maybe we can take a walk on the moon", "I can see it in your eyes, that you don\'t know what to say, I say goodbye, and walk away", "Cause tonight we can\'t do anything wrong", "Take me down to 34th street, where The Disco Biscuits are the king of the beat.", "Is there a pot of gold, at the end of this sweet rainbow?", "Always knew my home was in paradise.", "Hey little baby, now the morning\'s here. Gonna open my eyes, don\'t disappear."]
+var songLyrics = ["There was something so pleasant about that place.", "I wanna dance tonight. I wanna toast tonight.", "My umi said shine your light on the world.", "Making momma so proud. But your voice is too loud.", "Crank up the Beach Boys baby, don\'t let the music stop.", "Showin\' how funky strong is your fight", "Somebody said you got a new friend.", "I get jealous, but I\'m too cool to admit it.", "You gotta give me everything, baby, ain\'t no doubt. Need U 100%.", "Et si je compte et je compterai pour toi, je te conterai mes histoires.", "You’re kind of amazing like a time machine.", "The Digital Buddha is coming for you.", "On my tricycle, I’m in heaven, she’s my tricycle, I’m her melon.", "My ship at sail can climb a mountain, Ride it to the sky.", "You look like someone I know, where did I meet you and where do we go?", "And hope fuels generations. And hope can start your car. And hope is the root of fantasy. It\'s nothing but a star.", "And I found peace on the waiting room floor.", "You make me feel alive, like a parachute in the sky.", "Welcome to the crazy part of town. We like to take your life and turn it upside down", "In the shadow of the digital buddha are the countless wise, to bring you inspiration that you cannot buy.", "In the shadow of the digital buddha are the countless wise, to lift our generation to the highest high.", "Cheers to you it\'s like a dream you live by seeking fortunes at the door", "Baby I\'m in space when I\'m with you... Floating around nothing to do, maybe we can take a walk on the moon", "I can see it in your eyes, that you don\'t know what to say, I say goodbye, and walk away", "Cause tonight we can\'t do anything wrong", "Take me down to 34th street, where The Disco Biscuits are the king of the beat.", "Is there a pot of gold, at the end of this sweet rainbow?", "Always knew my home was in paradise.", "Hey little baby, now the morning\'s here. Gonna open my eyes, don\'t disappear."]
 
 // generate random song lyric from array above
 function getLyric() {
