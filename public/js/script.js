@@ -159,7 +159,7 @@ function getArtistTracks(artist){
 // for each of the 8 hype machine songs
 function appendArtistTracks(tracks){
   $(".news").children().remove();
-  $(".newsTitle").html("<h1>Hype Machine +</h1>");
+  $(".newsTitle").html("<h1>Latest Tracks +</h1>");
   for (i = 0; i < tracks.length; i ++){
       $(".news").append('<div class="newsitem"><a target="_blank" href="http://hypem.com/track/'+tracks[i].itemid+'">'+tracks[i]["artist"]+' - '+tracks[i]["title"]+'</a></div>')
     }
