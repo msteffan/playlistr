@@ -15,7 +15,7 @@ $("#makePlaylist").on("click", function(){
 // this generates a spotify iframe using the echonest basic playlist api and spotify song ids
 function makePlaylist(artistCode, songCount, playlistName){
     $("iframe").remove();
-    $.getJSON("https://developer.echonest.com/api/v4/playlist/static?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
+    $.getJSON("https://developer.echonest.com/api/v4/playlist/basic?api_key=6N51VGIQONFDX0AGP"+artistCode+"&format=json&results="+songCount+"&bucket=tracks&bucket=id:spotify", function(response){
         var tracks = [];
         for(i = 0;i < response.response.songs.length; i++){
             if (response.response.songs[i]["tracks"][0] === undefined) {
